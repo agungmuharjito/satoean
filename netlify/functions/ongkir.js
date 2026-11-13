@@ -44,8 +44,14 @@ exports.handler = async function(event) {
       // Ambil semua provinsi dulu
       const provRes = await httpsGet(`${BASE}/wilayah/provinsi?api_key=${KEY}`);
       const provData = JSON.parse(provRes);
+      
+      // Debug: return raw response jika gagal
       if (provData.code != 200) {
-        return { statusCode: 200, headers: { ...cors, 'Content-Type': 'application/json' }, body: JSON.stringify({ code: 500 }) };
+        return { 
+          statusCode: 200, 
+          headers: { ...cors, 'Content-Type': 'application/json' }, 
+          body: JSON.stringify({ code: 500, debug: provData }) 
+        };
       }
 
       // Ambil kota dari semua provinsi parallel
@@ -63,7 +69,24 @@ exports.handler = async function(event) {
       );
 
       const results = (await Promise.all(cityPromises)).flat().slice(0, 15);
-      result = JSON.stringify({ code: 200, value: results });
+      
+      // Debug: jika kosong, return info provinsi
+      if (results.length === 0) {
+        const firstProv = provData.value[0];
+        const testCity = await httpsGet(`${BASE}/wilayah/kabupaten?api_key=${KEY}&id_provinsi=${firstProv.id}`);
+        result = JSON.stringify({ 
+          code: 200, 
+          value: [], 
+          debug: { 
+            provinces_count: provData.value.length,
+            keyword,
+            first_province: firstProv,
+            first_province_cities: JSON.parse(testCity)
+          }
+        });
+      } else {
+        result = JSON.stringify({ code: 200, value: results });
+      }
 
     } else if (action === 'allcity') {
       // Ambil semua kota dari semua provinsi untuk search
