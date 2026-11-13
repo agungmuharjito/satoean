@@ -1136,15 +1136,7 @@
   var allCities = [];
 
   async function loadAllCities() {
-    try {
-      const res = await fetch(ONGKIR_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'allcity' })
-      });
-      const data = await res.json();
-      if (data.code == 200 && data.value) allCities = data.value;
-    } catch(e) {}
+    // Tidak perlu pre-load, search dilakukan saat user ketik
   }
   loadAllCities();
 
@@ -1152,22 +1144,34 @@
     clearTimeout(searchTimer);
     const suggest = document.getElementById('kotaSuggest');
     if (val.length < 2) { suggest.style.display = 'none'; return; }
-    if (allCities.length === 0) {
-      suggest.innerHTML = '<div class="kota-suggest-item">Memuat data kota...</div>';
-      suggest.style.display = 'block';
-      return;
-    }
-    const filtered = allCities.filter(c =>
-      c.name.toLowerCase().includes(val.toLowerCase()) ||
-      c.province.toLowerCase().includes(val.toLowerCase())
-    ).slice(0, 10);
-    if (filtered.length === 0) { suggest.style.display = 'none'; return; }
-    suggest.innerHTML = filtered.map(c =>
-      `<div class="kota-suggest-item" onclick="pilihKota('${c.id}','${c.name}, ${c.province}')">
-        ${c.name}, <span style="opacity:.6">${c.province}</span>
-      </div>`
-    ).join('');
+
+    suggest.innerHTML = '<div class="kota-suggest-item">Mencari...</div>';
     suggest.style.display = 'block';
+
+    searchTimer = setTimeout(async () => {
+      try {
+        const res = await fetch(ONGKIR_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'search', params: { keyword: val } })
+        });
+        const data = await res.json();
+
+        if (!data.value || data.value.length === 0) {
+          suggest.innerHTML = '<div class="kota-suggest-item" style="opacity:.6">Kota tidak ditemukan</div>';
+          return;
+        }
+
+        suggest.innerHTML = data.value.slice(0, 10).map(c =>
+          `<div class="kota-suggest-item" onclick="pilihKota('${c.id}','${c.name}, ${c.province}')">
+            ${c.name}, <span style="opacity:.6">${c.province}</span>
+          </div>`
+        ).join('');
+        suggest.style.display = 'block';
+      } catch(e) {
+        suggest.style.display = 'none';
+      }
+    }, 400);
   }
 
   function pilihKota(id, nama) {
