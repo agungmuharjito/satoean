@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SA.TOEAN - Setiap Rasa Punya Cerita</title>
+  <meta name="description" content="SA.TOEAN hadir membawa aneka sajian Nusantara dalam kemasan frozen food yang praktis. Tinggal siapkan, sajikan, dan nikmati bersama nasi hangat." />
+  <meta name="keywords" content="SA.TOEAN, frozen food, makanan nusantara, lauk praktis, frozen lauk, pesan frozen food" />
+  <meta property="og:title" content="SA.TOEAN - Setiap Rasa Punya Cerita" />
+  <meta property="og:description" content="Aneka sajian Nusantara dalam kemasan frozen food yang praktis. Tinggal siapkan, sajikan, dan nikmati." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:    #075B3D;
+      --green-dk: #054a31;
+      --green-lt: #0a7a52;
+      --cream:    #FAF8EF;
+      --cream-dk: #f0edd8;
+      --gold:     #C9A84C;
+      --terra:    #C2614A;
+      --white:    #FFFFFF;
+      --text:     #1a1a1a;
+      --text-lt:  #555;
+      --radius:   16px;
+      --shadow:   0 4px 24px rgba(0,0,0,.09);
+      --shadow-md:0 8px 40px rgba(0,0,0,.13);
+      --transition: .3s cubic-bezier(.4,0,.2,1);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    img { display: block; width: 100%; height: auto; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+    /* TYPOGRAPHY */
+    h1,h2,h3 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+    .section-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+
+    /* LAYOUT */
+    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 72px 0; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 14px 28px; border-radius: 50px;
+      font-weight: 700; font-size: 14px; letter-spacing: .04em;
+      transition: var(--transition); white-space: nowrap;
+    }
+    .btn-primary { background: var(--green); color: var(--white); }
+    .btn-primary:hover { background: var(--green-lt); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-outline { background: transparent; color: var(--green); border: 2px solid var(--green); }
+    .btn-outline:hover { background: var(--green); color: var(--white); transform: translateY(-2px); }
+    .btn-gold { background: var(--gold); color: var(--white); }
+    .btn-gold:hover { background: #b5932f; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-wa { background: #25D366; color: var(--white); font-size: 15px; padding: 16px 36px; }
+    .btn-wa:hover { background: #1db954; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,.35); }
+
+    /* NAVBAR */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(250,248,239,.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(7,91,61,.08);
+      transition: var(--transition);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px; padding: 0 20px; max-width: 1100px; margin: 0 auto;
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--green); letter-spacing: .04em; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--text); transition: color var(--transition); }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta { display: flex; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--green); border-radius: 2px; transition: var(--transition); }
+    .mobile-menu {
+      display: none; position: fixed; top: 64px; left: 0; right: 0;
+      background: var(--cream); border-bottom: 1px solid rgba(7,91,61,.1);
+      padding: 20px; z-index: 998; flex-direction: column; gap: 12px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 600; color: var(--text); padding: 10px 0; border-bottom: 1px solid var(--cream-dk); }
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* HERO */
+    #hero {
+      padding-top: 64px; min-height: 100svh;
+      background: var(--green); display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 50%, rgba(201,168,76,.12) 0%, transparent 50%),
+        radial-gradient(circle at 85% 20%, rgba(255,255,255,.05) 0%, transparent 40%);
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: center; width: 100%; max-width: 1100px;
+      margin: 0 auto; padding: 60px 20px; position: relative; z-index: 1;
+    }
+    .hero-text { color: var(--white); }
+    .hero-label { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .hero-title { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.1; margin-bottom: 20px; color: var(--white); }
+    .hero-title em { color: var(--gold); font-style: italic; }
+    .hero-sub { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,.8); margin-bottom: 36px; max-width: 440px; }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-img-grid { display: none; }
+    .hero-img-wrap { position: relative; }
+    .hero-slider { position: relative; border-radius: var(--radius); overflow: hidden; }
+    .hero-slides { display: flex; transition: transform .5s cubic-bezier(.4,0,.2,1); }
+    .hero-slide { min-width: 100%; }
+    .hero-slide img { width: 100%; height: auto; display: block; border-radius: 0; }
+    .hero-slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+    .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.35); border: none; cursor: pointer; transition: background .3s, transform .3s; padding: 0; }
+    .hero-dot.active { background: var(--gold); transform: scale(1.3); }
+    .hero-slider-nav { position: absolute; top: 50%; transform: translateY(-50%); display: flex; justify-content: space-between; width: 100%; padding: 0 10px; pointer-events: none; }
+    .hero-nav-btn { width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,.35); border: none; color: #fff; font-size: 18px; cursor: pointer; pointer-events: all; display: flex; align-items: center; justify-content: center; transition: background .3s; }
+    .hero-badge {
+      position: absolute; bottom: -16px; left: -16px;
+      background: var(--gold); color: var(--white); border-radius: 50%;
+      width: 90px; height: 90px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      font-size: 10px; font-weight: 700; line-height: 1.3; letter-spacing: .04em;
+      box-shadow: var(--shadow-md);
+    }
+    .hero-badge span { font-size: 20px; display: block; }
+
+    /* BRAND INTRO */
+    #intro { background: var(--cream); }
+    .intro-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .intro-text h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--green); margin-bottom: 20px; }
+    .intro-text p { color: var(--text-lt); font-size: 16px; line-height: 1.8; margin-bottom: 28px; }
+    .intro-stats { display: flex; gap: 32px; margin-top: 8px; }
+    .intro-stat .num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--green); font-weight: 700; }
+    .intro-stat .lbl { font-size: 12px; color: var(--text-lt); font-weight: 600; letter-spacing: .05em; }
+    .intro-img-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: start; }
+    .intro-img-col .img-tall { grid-row: 1 / 3; aspect-ratio: 3/4; overflow: hidden; border-radius: var(--radius); }
+    .intro-img-col .img-sq { aspect-ratio: 4/3; overflow: hidden; border-radius: var(--radius); }
+    .intro-img-col img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    .intro-img-col img:hover { transform: scale(1.04); }
+
+    /* CATALOG */
+    #catalog { background: var(--white); }
+    .catalog-header { text-align: center; margin-bottom: 48px; }
+    .catalog-header h2 { font-size: clamp(2rem, 4vw, 2.8rem); color: var(--green); margin-bottom: 12px; }
+    .catalog-header p { color: var(--text-lt); max-width: 480px; margin: 0 auto; }
+    .catalog-tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 36px; }
+    .tab-btn {
+      padding: 10px 28px; border-radius: 50px;
+      font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      border: 2px solid transparent; transition: var(--transition); cursor: pointer;
+    }
+    .tab-btn.active, .tab-btn:hover { background: var(--green); color: var(--white); }
+    .tab-btn:not(.active) { background: var(--cream); color: var(--text); border-color: var(--cream-dk); }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .product-card {
+      background: var(--white); border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow); transition: transform var(--transition), box-shadow var(--transition);
+      border: 1px solid rgba(0,0,0,.05);
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+    .product-img { aspect-ratio: 4/3; overflow: hidden; background: var(--cream-dk); }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    .product-card:hover .product-img img { transform: scale(1.06); }
+    .product-body { padding: 18px 18px 20px; }
+    .product-category { font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .product-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .product-desc { font-size: 13px; color: var(--text-lt); line-height: 1.6; margin-bottom: 14px; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .product-price { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--green); }
+    .btn-order-sm {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 18px; background: var(--green); color: var(--white);
+      border-radius: 50px; font-size: 12px; font-weight: 700; letter-spacing: .04em;
+      transition: var(--transition); white-space: nowrap;
+    }
+    .btn-order-sm:hover { background: var(--green-lt); transform: translateY(-2px); }
+
+    /* PACKAGES */
+    #packages { background: var(--green); color: var(--white); }
+    .pkg-header { text-align: center; margin-bottom: 48px; }
+    .pkg-header h2 { font-size: clamp(2rem, 4vw, 2.8rem); color: var(--white); margin-bottom: 10px; }
+    .pkg-header .sub { font-size: 1.1rem; color: var(--gold); font-weight: 700; margin-bottom: 10px; }
+    .pkg-header p { color: rgba(255,255,255,.75); max-width: 520px; margin: 0 auto; }
+    .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+    .pkg-card {
+      border-radius: var(--radius); padding: 32px 24px; position: relative;
+      display: flex; flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .pkg-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,.25); }
+
+    /* Paket A - Cream */
+    .pkg-card-a { background: var(--cream); border: 1px solid rgba(201,168,76,.3); color: var(--text); }
+    .pkg-card-a .pkg-name        { color: var(--green); }
+    .pkg-card-a .pkg-isi         { color: var(--text-lt); }
+    .pkg-card-a .pkg-price-normal{ color: var(--text-lt); opacity: .6; text-decoration: line-through; font-size:13px; margin-bottom:2px; }
+    .pkg-card-a .pkg-price-promo { color: var(--green); }
+    .pkg-card-a .pkg-recs-label  { color: var(--text-lt); }
+    .pkg-card-a .pkg-recs li     { color: var(--text); }
+    .pkg-card-a .pkg-bonus       { background: rgba(7,91,61,.08); border: 1px solid rgba(7,91,61,.2); color: var(--green); }
+
+    /* Paket B - Gold */
+    .pkg-card-b { background: var(--gold); border: 1px solid #b5932f; }
+    .pkg-card-b .pkg-name        { color: #fff; }
+    .pkg-card-b .pkg-isi         { color: rgba(255,255,255,.85); }
+    .pkg-card-b .pkg-price-normal{ color: rgba(255,255,255,.65); text-decoration: line-through; font-size:13px; margin-bottom:2px; }
+    .pkg-card-b .pkg-price-promo { color: #fff; }
+    .pkg-card-b .pkg-recs-label  { color: rgba(255,255,255,.75); }
+    .pkg-card-b .pkg-recs li     { color: rgba(255,255,255,.9); }
+    .pkg-card-b .pkg-recs li::before { color: #fff; }
+    .pkg-card-b .btn-pkg         { background: #fff; color: var(--gold); }
+    .pkg-card-b .btn-pkg:hover   { background: var(--cream); }
+
+    /* Paket C - Transparan */
+    .pkg-card-c { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15); color: var(--white); }
+    .pkg-card-c .pkg-name        { color: var(--gold); }
+    .pkg-card-c .pkg-isi         { color: rgba(255,255,255,.7); }
+    .pkg-card-c .pkg-price-normal{ color: rgba(255,255,255,.45); text-decoration: line-through; font-size:13px; margin-bottom:2px; }
+    .pkg-card-c .pkg-price-promo { color: var(--gold); }
+    .pkg-card-c .pkg-recs-label  { color: rgba(255,255,255,.5); }
+    .pkg-card-c .pkg-recs li     { color: rgba(255,255,255,.8); }
+
+    /* Shared pkg elements */
+    .pkg-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
+    .pkg-isi  { font-size: 13px; margin-bottom: 20px; }
+    .pkg-price-wrap { margin-bottom: 20px; }
+    .pkg-price-promo { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; }
+    .pkg-recs { margin-bottom: 20px; }
+    .pkg-recs-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+    .pkg-recs ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .pkg-recs li { font-size: 12px; padding-left: 14px; position: relative; }
+    .pkg-recs li::before { content: '\2726'; position: absolute; left: 0; color: var(--gold); font-size: 8px; top: 3px; }
+    .pkg-bonus {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(201,168,76,.15); border: 1px solid rgba(201,168,76,.3);
+      border-radius: 8px; padding: 8px 12px;
+      font-size: 12px; font-weight: 600; color: var(--gold); margin-bottom: 20px;
+    }
+    .btn-pkg {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 100%; padding: 14px; border-radius: 50px;
+      font-weight: 700; font-size: 14px; letter-spacing: .05em; text-transform: uppercase;
+      margin-top: auto; transition: var(--transition); background: var(--gold); color: var(--white);
+    }
+    .btn-pkg:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+    /* WHY */
+    #why { background: var(--cream); }
+    .why-header { text-align: center; margin-bottom: 48px; }
+    .why-header h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--green); margin-bottom: 10px; }
+    .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .why-card {
+      background: var(--white); border-radius: var(--radius); padding: 32px 28px;
+      display: flex; gap: 20px; align-items: flex-start;
+      box-shadow: var(--shadow); transition: transform var(--transition);
+    }
+    .why-card:hover { transform: translateY(-4px); }
+    .why-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: rgba(7,91,61,.08); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .why-text h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--green); margin-bottom: 6px; }
+    .why-text p { font-size: 14px; color: var(--text-lt); line-height: 1.7; }
+
+    /* HOW TO SERVE */
+    #howto { background: var(--white); }
+    .howto-header { text-align: center; margin-bottom: 48px; }
+    .howto-header h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); color: var(--green); margin-bottom: 10px; }
+    .howto-header p { color: var(--text-lt); max-width: 480px; margin: 0 auto; }
+    .methods-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 36px; }
+    .method-card {
+      background: var(--cream); border-radius: var(--radius); padding: 28px 22px;
+      border: 1px solid var(--cream-dk); transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .method-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .method-icon {
+      width: 56px; height: 56px; background: var(--green); border-radius: 16px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+    }
+    .method-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--green); font-weight: 700; margin-bottom: 14px; }
+    .method-steps { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .method-steps li { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--text-lt); line-height: 1.6; }
+    .step-num {
+      width: 22px; height: 22px; border-radius: 50%; background: var(--green);
+      color: var(--white); font-size: 11px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+    }
+    .howto-tip {
+      background: rgba(7,91,61,.06); border-left: 4px solid var(--green);
+      border-radius: 0 var(--radius) var(--radius) 0; padding: 18px 22px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .howto-tip .tip-icon { flex-shrink: 0; }
+    .howto-tip p { font-size: 14px; color: var(--text-lt); line-height: 1.7; }
+    .howto-tip strong { color: var(--green); }
+
+    /* ORDER */
+    #order { background: var(--green); text-align: center; }
+    .order-inner { max-width: 600px; margin: 0 auto; }
+    .order-inner h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); color: var(--white); margin-bottom: 16px; }
+    .order-inner p { color: rgba(255,255,255,.8); font-size: 16px; line-height: 1.7; margin-bottom: 36px; }
+
+    /* FOOTER */
+    footer { background: #04301f; color: rgba(255,255,255,.75); padding: 48px 0 32px; }
+    .footer-inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--white); }
+    .footer-tagline { font-size: 13px; font-style: italic; color: var(--gold); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .footer-link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,.75); transition: color var(--transition); }
+    .footer-link:hover { color: var(--white); }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.35); border-top: 1px solid rgba(255,255,255,.08); padding-top: 20px; width: 100%; text-align: center; }
+
+    /* FLOATING WA */
+    .floating-wa {
+      position: fixed; bottom: 24px; right: 24px; z-index: 990;
+      width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.45); transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .floating-wa:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,.55); }
+    .floating-wa svg { width: 28px; height: 28px; fill: var(--white); }
+
+    /* ANIMATIONS */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-title { font-size: 2.4rem; }
+      .hero-sub { max-width: 100%; }
+      .intro-inner { grid-template-columns: 1fr; gap: 36px; }
+      .intro-img-col { order: -1; }
+      .packages-grid { grid-template-columns: 1fr; gap: 20px; }
+      .methods-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 56px 0; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero-inner { padding: 48px 20px; }
+      .hero-title { font-size: 2rem; }
+      .hero-buttons { flex-direction: column; align-items: flex-start; }
+      .products-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .product-body { padding: 12px 12px 14px; }
+      .product-name { font-size: 1rem; }
+      .product-desc { font-size: 12px; }
+      .product-price { font-size: 1.1rem; }
+      .btn-order-sm { font-size: 11px; padding: 7px 12px; }
+      .floating-wa { bottom: 16px; right: 16px; }
+    }
+    @media (max-width: 400px) {
+      .products-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav role="navigation" aria-label="Navigasi utama">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero" aria-label="SA.TOEAN">SA.TOEAN</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#catalog">Menu</a></li>
+      <li><a href="#packages">Paket</a></li>
+      <li><a href="#howto">Cara Saji</a></li>
+      <li><a href="#order">Order</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="btn btn-primary" style="padding:10px 20px;font-size:13px;"
+         href="https://wa.me/6281578427171?text=Halo+SA.TOEAN%2C+saya+ingin+tahu+lebih+lanjut+tentang+produk+Anda."
+         target="_blank" rel="noopener">Order via WA</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Buka menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#catalog" onclick="closeMobileMenu()">Menu</a>
+  <a href="#packages" onclick="closeMobileMenu()">Paket Bersa.toe</a>
+  <a href="#why" onclick="closeMobileMenu()">Keunggulan</a>
+  <a href="#howto" onclick="closeMobileMenu()">Cara Sajian</a>
+  <a href="#order" onclick="closeMobileMenu()">Order Sekarang</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-pattern" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-text fade-in">
+      <span class="hero-label">Setiap Rasa Punya Cerita</span>
+      <h1 class="hero-title">
+        Rasa Nusantara,<br><em>Lebih Praktis</em><br>Dinikmati.
+      </h1>
+      <p class="hero-sub">
+        Temukan aneka sajian Nusantara favoritmu dalam kemasan frozen food yang praktis. Tinggal siapkan, sajikan, dan nikmati.
+      </p>
+      <div class="hero-buttons">
+        <a class="btn btn-gold" href="#catalog">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Lihat Menu
+        </a>
+        <a class="btn btn-outline" style="color:var(--white);border-color:rgba(255,255,255,.5);"
+           href="#order">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order Sekarang
+        </a>
+      </div>
+    </div>
+    <div class="hero-img-wrap fade-in" style="transition-delay:.15s">
+      <div class="hero-slider">
+        <div class="hero-slides" id="heroSlides">
+          <div class="hero-slide"><img src="img/ayam-taichan.png" alt="Ayam Taichan SA.TOEAN" loading="eager" /></div>
+          <div class="hero-slide"><img src="img/tongkol-sambal-matah.png" alt="Tongkol Sambal Matah SA.TOEAN" loading="lazy" /></div>
+          <div class="hero-slide"><img src="img/sate-lilit-ayam.png" alt="Sate Lilit Ayam SA.TOEAN" loading="lazy" /></div>
+          <div class="hero-slide"><img src="img/cumi-asin-lombok-ijo.png" alt="Cumi Asin Lombok Ijo SA.TOEAN" loading="lazy" /></div>
+          <div class="hero-slide"><img src="img/oseng-bawang-teri-medan.png" alt="Oseng Bawang Teri Medan SA.TOEAN" loading="lazy" /></div>
+          <div class="hero-slide"><img src="img/kering-tempe-teri-kacang.png" alt="Kering Tempe Teri Kacang SA.TOEAN" loading="lazy" /></div>
+          <div class="hero-slide"><img src="img/cah-tauge-kulit-ayam.png" alt="Cah Tauge Kulit Ayam SA.TOEAN" loading="lazy" /></div>
+          <div class="hero-slide"><img src="img/tumis-brokoli-ayam.png" alt="Tumis Brokoli Ayam SA.TOEAN" loading="lazy" /></div>
+          <div class="hero-slide"><img src="img/pepes-telur-jamur.png" alt="Pepes Telur Jamur SA.TOEAN" loading="lazy" /></div>
+        </div>
+        <div class="hero-slider-nav">
+          <button class="hero-nav-btn" onclick="slideHero(-1)" aria-label="Sebelumnya">&#8249;</button>
+          <button class="hero-nav-btn" onclick="slideHero(1)" aria-label="Berikutnya">&#8250;</button>
+        </div>
+      </div>
+      <div class="hero-slider-dots" id="heroDots"></div>
+      <div class="hero-badge">
+        <span>9</span>Menu<br>Pilihan
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND INTRO -->
+<section id="intro">
+  <div class="container">
+    <div class="intro-inner">
+      <div class="intro-text fade-in">
+        <p class="section-label">Tentang Kami</p>
+        <h2>Kenalan dengan SA.TOEAN</h2>
+        <p>
+          Setiap hidangan punya cerita, setiap rasa punya kenangan. SA.TOEAN hadir membawa aneka sajian Nusantara dalam cara yang lebih praktis. Karena menikmati makanan enak tidak harus selalu dimulai dari dapur yang sibuk.
+        </p>
+        <p>
+          Kami meracik sajian khas Indonesia dengan cita rasa autentik, dikemas dalam frozen food yang siap saji - cocok untuk keluarga, pekerja, anak kos, dan siapa saja yang ingin makan enak tanpa ribet.
+        </p>
+        <div class="intro-stats">
+          <div class="intro-stat"><div class="num">9</div><div class="lbl">Menu Pilihan</div></div>
+          <div class="intro-stat"><div class="num">3</div><div class="lbl">Paket Hemat</div></div>
+          <div class="intro-stat"><div class="num">3</div><div class="lbl">Cara Saji</div></div>
+        </div>
+      </div>
+      <div class="intro-img-col fade-in" style="transition-delay:.15s">
+        <div class="img-tall">
+          <img src="img/cumi-asin-lombok-ijo.png" alt="Cumi Asin Lombok Ijo SA.TOEAN" loading="lazy" />
+        </div>
+        <div class="img-sq">
+          <img src="img/oseng-bawang-teri-medan.png" alt="Oseng Bawang Teri Medan SA.TOEAN" loading="lazy" />
+        </div>
+        <div class="img-sq">
+          <img src="img/pepes-telur-jamur.png" alt="Pepes Telur Jamur SA.TOEAN" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section id="catalog">
+  <div class="container">
+    <div class="catalog-header fade-in">
+      <p class="section-label">Produk Kami</p>
+      <h2>Macam Rasa SA.TOEAN</h2>
+      <p>Pilih lauk favoritmu - semua siap menemani nasi hangatmu.</p>
+    </div>
+
+    <div class="catalog-tabs" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" onclick="filterProducts('all', this)">Semua</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="filterProducts('protein', this)">Protein</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="filterProducts('sayur', this)">Sayur</button>
+    </div>
+
+    <div class="products-grid" id="productsGrid" role="list">
+
+      <article class="product-card fade-in" data-category="protein" role="listitem">
+        <div class="product-img"><img src="img/ayam-taichan.png" alt="Ayam Taichan SA.TOEAN" loading="lazy" /></div>
+        <div class="product-body">
+          <p class="product-category">Protein</p>
+          <h3 class="product-name">Ayam Taichan</h3>
+          <p class="product-desc">Kapan lagi bisa makan sate taichan sepraktis ini.</p>
+          <div class="product-footer">
+            <span class="product-price">Rp16.500</span>
+            <a class="btn-order-sm" href="#order" onclick="orderItem('ayam_taichan')" aria-label="Pesan Ayam Taichan">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pesan
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card fade-in" data-category="protein" role="listitem" style="transition-delay:.05s">
+        <div class="product-img"><img src="img/tongkol-sambal-matah.png" alt="Tongkol Sambal Matah SA.TOEAN" loading="lazy" /></div>
+        <div class="product-body">
+          <p class="product-category">Protein</p>
+          <h3 class="product-name">Tongkol Sambal Matah</h3>
+          <p class="product-desc">Gurih cakalang, segar pedasnya matah, bikin nambah nasi!</p>
+          <div class="product-footer">
+            <span class="product-price">Rp18.000</span>
+            <a class="btn-order-sm" href="#order" onclick="orderItem('tongkol_sambal_matah')" aria-label="Pesan Tongkol Sambal Matah">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pesan
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card fade-in" data-category="protein" role="listitem" style="transition-delay:.1s">
+        <div class="product-img"><img src="img/oseng-bawang-teri-medan.png" alt="Oseng Bawang Teri Medan SA.TOEAN" loading="lazy" /></div>
+        <div class="product-body">
+          <p class="product-category">Protein</p>
+          <h3 class="product-name">Oseng Bawang Teri Medan</h3>
+          <p class="product-desc">Yang lagi viral di kalangan pecinta bawang, siap nagih!</p>
+          <div class="product-footer">
+            <span class="product-price">Rp16.500</span>
+            <a class="btn-order-sm" href="#order" onclick="orderItem('oseng_bawang_teri_medan')" aria-label="Pesan Oseng Bawang Teri Medan">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pesan
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card fade-in" data-category="protein" role="listitem" style="transition-delay:.15s">
+        <div class="product-img"><img src="img/cumi-asin-lombok-ijo.png" alt="Cumi Asin Lombok Ijo SA.TOEAN" loading="lazy" /></div>
+        <div class="product-body">
+          <p class="product-category">Protein</p>
+          <h3 class="product-name">Cumi Asin Lombok Ijo</h3>
+          <p class="product-desc">Klasik but legend. Apa sih yang nggak cocok sama lombok ijo?</p>
+          <div class="product-footer">
+            <span class="product-price">Rp18.000</span>
+            <a class="btn-order-sm" href="#order" onclick="orderItem('cumi_asin_lombok_ijo')" aria-label="Pesan Cumi Asin Lombok Ijo">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pesan
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card fade-in" data-category="protein" role="listitem" style="transition-delay:.2s">
+        <div class="product-img"><img src="img/sate-lilit-ayam.png" alt="Sate Lilit Ayam SA.TOEAN" loading="lazy" /></div>
+        <div class="product-body">
+          <p class="product-category">Protein</p>
+          <h3 class="product-name">Sate Lilit Ayam <small style="font-size:.8em;color:var(--text-lt)">(3 pcs)</small></h3>
+          <p class="product-desc">Tusuknya aja pakai sereh, kebayang nggak wangi dan gurihnya?</p>
+          <div class="product-footer">
+            <span class="product-price">Rp18.000</span>
+            <a class="btn-order-sm" href="#order" onclick="orderItem('sate_lilit_ayam')" aria-label="Pesan Sate Lilit Ayam">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pesan
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card fade-in" data-category="protein" role="listitem" style="transition-delay:.25s">
+        <div class="product-img"><img src="img/kering-tempe-teri-kacang.png" alt="Kering Tempe Teri Kacang SA.TOEAN" loading="lazy" /></div>
+        <div class="product-body">
+          <p class="product-category">Protein</p>
+          <h3 class="product-name">Kering Tempe Teri Kacang</h3>
+          <p class="product-desc">Ini sih sudah tidak perlu diragukan lagi.</p>
+          <div class="product-footer">
+            <span class="product-price">Rp18.000</span>
+            <a class="btn-order-sm" href="#order" onclick="orderItem('kering_tempe_teri_kacang')" aria-label="Pesan Kering Tempe Teri Kacang">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pesan
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- SAYUR -->
+      <article class="product-card fade-in" data-category="sayur" role="listitem" style="transition-delay:.3s">
+        <div class="product-img"><img src="img/cah-tauge-kulit-ayam.png" alt="Cah Tauge Kulit Ayam SA.TOEAN" loading="lazy" /></div>
+        <div class="product-body">
+          <p class="product-category">Sayur</p>
+          <h3 class="product-name">Cah Tauge Kulit Ayam</h3>
+          <p class="product-desc">Simple tapi combo maut buat nasi.</p>
+          <div class="product-footer">
+            <span class="product-price">Rp16.500</span>
+            <a class="btn-order-sm" href="#order" onclick="orderItem('cah_tauge_kulit_ayam')" aria-label="Pesan Cah Tauge Kulit Ayam">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pesan
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card fade-in" data-category="sayur" role="listitem" style="transition-delay:.35s">
+        <div class="product-img"><img src="img/tumis-brokoli-ayam.png" alt="Tumis Brokoli Ayam SA.TOEAN" loading="lazy" /></div>
+        <div class="product-body">
+          <p class="product-category">Sayur</p>
+          <h3 class="product-name">Tumis Brokoli Ayam</h3>
+          <p class="product-desc">Biar ada varian ijo-ijonya.</p>
+          <div class="product-footer">
+            <span class="product-price">Rp16.500</span>
+            <a class="btn-order-sm" href="#order" onclick="orderItem('tumis_brokoli_ayam')" aria-label="Pesan Tumis Brokoli Ayam">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pesan
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card fade-in" data-category="sayur" role="listitem" style="transition-delay:.4s">
+        <div class="product-img"><img src="img/pepes-telur-jamur.png" alt="Pepes Telur Jamur SA.TOEAN" loading="lazy" /></div>
+        <div class="product-body">
+          <p class="product-category">Sayur</p>
+          <h3 class="product-name">Pepes Telur Jamur</h3>
+          <p class="product-desc">Telur dan jamur dikukus menggunakan daun pisang.</p>
+          <div class="product-footer">
+            <span class="product-price">Rp16.500</span>
+            <a class="btn-order-sm" href="#order" onclick="orderItem('pepes_telur_jamur')" aria-label="Pesan Pepes Telur Jamur">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pesan
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="container">
+    <div class="pkg-header fade-in">
+      <p class="section-label" style="color:rgba(201,168,76,.9)">Paket Hemat</p>
+      <h2>PAKET BERSA.TOE</h2>
+      <p class="sub">Sudah pasti lebih hemat!</p>
+      <p>Protein dan sayur Bersa.toe. Mereka berdua sebenarnya ditakdirkan untuk berada di atas satoe piring yang sama.</p>
+    </div>
+
+    <div class="packages-grid">
+      <!-- BERSA.TOE A -->
+      <div class="pkg-card pkg-card-a fade-in" style="transition-delay:.05s">
+        <p class="pkg-name">BERSA.TOE A</p>
+        <p class="pkg-isi">9 menu Bersa.toe - cobain semuanya!</p>
+        <div class="pkg-price-wrap">
+          <p class="pkg-price-normal">Rp155.000</p>
+          <p class="pkg-price-promo">Rp145.000</p>
+        </div>
+        <div class="pkg-bonus">
+          &#127873; FREE THERMAL BAG<br><span style="font-size:10px;opacity:.8">selama persediaan masih ada</span>
+        </div>
+        <a class="btn-pkg" href="#order" onclick="orderItem('paket_a')" aria-label="Order Paket A">ORDER PAKET A</a>
+      </div>
+
+      <!-- BERSA.TOE B -->
+      <div class="pkg-card pkg-card-b fade-in" style="transition-delay:.1s">
+        <p class="pkg-name">BERSA.TOE B</p>
+        <p class="pkg-isi">3 Protein + 2 Sayur</p>
+        <div class="pkg-price-wrap">
+          <p class="pkg-price-normal">Rp87.000</p>
+          <p class="pkg-price-promo">Rp80.000</p>
+        </div>
+        <div class="pkg-recs">
+          <p class="pkg-recs-label">Rekomendasi Rasa</p>
+          <ul>
+            <li>Oseng Bawang Teri Medan</li>
+            <li>Cumi Asin Lombok Ijo</li>
+            <li>Ayam Taichan</li>
+            <li>Tumis Brokoli Ayam</li>
+            <li>Pepes Telur Jamur</li>
+          </ul>
+        </div>
+        <a class="btn-pkg" href="#order" onclick="orderItem('paket_b')" aria-label="Order Paket B">ORDER PAKET B</a>
+      </div>
+
+      <!-- BERSA.TOE C -->
+      <div class="pkg-card pkg-card-c fade-in" style="transition-delay:.15s">
+        <p class="pkg-name">BERSA.TOE C</p>
+        <p class="pkg-isi">2 Protein + 1 Sayur</p>
+        <div class="pkg-price-wrap">
+          <p class="pkg-price-normal">Rp53.000</p>
+          <p class="pkg-price-promo">Rp50.000</p>
+        </div>
+        <div class="pkg-recs">
+          <p class="pkg-recs-label">Rekomendasi Rasa</p>
+          <ul>
+            <li>Sate Lilit Ayam</li>
+            <li>Tongkol Sambal Matah</li>
+            <li>Cah Tauge Kulit Ayam</li>
+          </ul>
+        </div>
+        <a class="btn-pkg" href="#order" onclick="orderItem('paket_c')" aria-label="Order Paket C">ORDER PAKET C</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="container">
+    <div class="why-header fade-in">
+      <p class="section-label">Keunggulan</p>
+      <h2>Enak Nggak Harus Ribet.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-in">
+        <div class="why-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="why-text">
+          <h3>Praktis</h3>
+          <p>Tidak perlu repot menyiapkan bahan dan bumbu dari awal. SA.TOEAN sudah siap untukmu.</p>
+        </div>
+      </div>
+      <div class="why-card fade-in" style="transition-delay:.08s">
+        <div class="why-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="why-text">
+          <h3>Pilihan Beragam</h3>
+          <p>Aneka lauk dan sayur dengan cita rasa Nusantara yang autentik - 9 menu siap pilih.</p>
+        </div>
+      </div>
+      <div class="why-card fade-in" style="transition-delay:.16s">
+        <div class="why-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="why-text">
+          <h3>Fleksibel</h3>
+          <p>Bisa disajikan dengan beberapa metode pemanasan - rebus, tumis, atau microwave.</p>
+        </div>
+      </div>
+      <div class="why-card fade-in" style="transition-delay:.24s">
+        <div class="why-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="why-text">
+          <h3>Siap Dinikmati</h3>
+          <p>Solusi praktis untuk menemani aktivitas sehari-hari - cocok buat keluarga, pekerja, maupun anak kos.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO SERVE -->
+<section id="howto">
+  <div class="container">
+    <div class="howto-header fade-in">
+      <p class="section-label">Cara Penyajian</p>
+      <h2>Semudah Itu Menikmati SA.TOEAN</h2>
+      <p>Tiga cara gampang untuk menikmati SA.TOEAN kapan saja dan di mana saja.</p>
+    </div>
+
+    <div class="methods-grid">
+      <div class="method-card fade-in">
+        <div class="method-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11h18M3 11c0-4.4 3.6-8 8-8h2c4.4 0 8 3.6 8 8M3 11v5a2 2 0 002 2h14a2 2 0 002-2v-5M8 21h8"/></svg>
+        </div>
+        <h3 class="method-title">A. Rebus</h3>
+        <ol class="method-steps">
+          <li><span class="step-num">1</span>Pilih menu favorit.</li>
+          <li><span class="step-num">2</span>Panaskan air hingga mendidih.</li>
+          <li><span class="step-num">3</span>Masukkan SA.TOEAN beserta kemasan ke dalam air mendidih selama 2 menit jika tidak beku, atau 10 menit jika masih beku.</li>
+          <li><span class="step-num">4</span>Buka kemasan dan sajikan.</li>
+        </ol>
+      </div>
+
+      <div class="method-card fade-in" style="transition-delay:.1s">
+        <div class="method-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12c0-3.3 2.7-6 6-6s6 2.7 6 6-2.7 6-6 6-6-2.7-6-6z"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </div>
+        <h3 class="method-title">B. Tumis</h3>
+        <ol class="method-steps">
+          <li><span class="step-num">1</span>Pilih menu favorit.</li>
+          <li><span class="step-num">2</span>Jika beku, rendam kemasan dengan air panas selama 2 menit atau diamkan 5 menit pada suhu ruang.</li>
+          <li><span class="step-num">3</span>Keluarkan produk dari kemasan.</li>
+          <li><span class="step-num">4</span>Tumis hingga panas dan sajikan.</li>
+        </ol>
+      </div>
+
+      <div class="method-card fade-in" style="transition-delay:.2s">
+        <div class="method-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 8h10M7 12h4"/></svg>
+        </div>
+        <h3 class="method-title">C. Microwave</h3>
+        <ol class="method-steps">
+          <li><span class="step-num">1</span>Pilih menu favorit.</li>
+          <li><span class="step-num">2</span>Buka kemasan dan tuangkan ke wadah microwave-safe.</li>
+          <li><span class="step-num">3</span>Gunakan mode defrost jika masih beku.</li>
+          <li><span class="step-num">4</span>Jika sudah tidak beku, panaskan selama 1-2 menit.</li>
+          <li><span class="step-num">5</span>Sajikan.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="howto-tip fade-in">
+      <span class="tip-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#075B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </span>
+      <p>
+        <strong>Tips SA.TOEAN:</strong> Keluarkan SA.TOEAN dari freezer pada malam hari dan letakkan di chiller bawah agar tidak beku. Pagi hari produk lebih siap diproses.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section id="order" style="background:var(--green);padding:72px 0;">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;margin-bottom:48px;">
+      <p class="section-label" style="color:rgba(201,168,76,.9)">Pemesanan</p>
+      <h2 style="color:var(--white);font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:12px;">Sudah Tahu Mau Makan Apa Hari Ini?</h2>
+      <p style="color:rgba(255,255,255,.75);max-width:480px;margin:0 auto;">Isi form di bawah - pesananmu langsung masuk ke WhatsApp kami dan tercatat otomatis.</p>
+    </div>
+
+    <div class="oform fade-in">
+
+      <!-- DATA PEMESAN -->
+      <div class="oform-section">
+        <h3 class="oform-title">Data Pemesan</h3>
+        <div class="oform-row">
+          <div class="oform-group">
+            <label for="f-nama">Nama Lengkap *</label>
+            <input type="text" id="f-nama" placeholder="Contoh: Budi Santoso" />
+          </div>
+          <div class="oform-group">
+            <label for="f-hp">Nomor HP / WhatsApp *</label>
+            <input type="tel" id="f-hp" placeholder="Contoh: 08123456789" />
+          </div>
+        </div>
+        <div class="oform-group">
+          <label for="f-alamat">Alamat Lengkap *</label>
+          <input type="text" id="f-alamat" placeholder="Contoh: Jl. Merdeka No.10, Kebayoran Baru" />
+        </div>
+      </div>
+
+      <!-- CEK ONGKIR -->
+      <div class="oform-section">
+        <h3 class="oform-title">Cek Ongkir</h3>
+        <p class="oform-sub">Pilih kota tujuan dan kurir untuk estimasi ongkos kirim dari Surabaya</p>
+        <div class="oform-row">
+          <div class="oform-group">
+            <label for="f-kota">Kota Tujuan *</label>
+            <input type="text" id="f-kota" placeholder="Ketik nama kota..." oninput="searchKota(this.value)" autocomplete="off" />
+            <div id="kotaSuggest" class="kota-suggest" style="display:none;"></div>
+            <input type="hidden" id="f-kota-id" />
+          </div>
+          <div class="oform-group">
+            <label for="f-kurir">Kurir</label>
+            <select id="f-kurir">
+              <option value="jne">JNE</option>
+              <option value="jnt">J&T Express</option>
+              <option value="pos">POS Indonesia</option>
+              <option value="tiki">TIKI</option>
+              <option value="sicepat">SiCepat</option>
+              <option value="anteraja">Anteraja</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="btn-cek-ongkir" id="btnCekOngkir" onclick="cekOngkir()">
+          Cek Ongkir
+        </button>
+        <div id="ongkirResult" style="display:none;margin-top:16px;"></div>
+      </div>
+
+      <!-- MENU SATUAN -->
+      <div class="oform-section">
+        <h3 class="oform-title">Pilih Menu Satuan</h3>
+        <p class="oform-sub">Atur jumlah yang kamu inginkan</p>
+        <div class="omenu-grid">
+
+          <div class="omenu-item" data-price="16500" data-key="ayam_taichan" data-label="Ayam Taichan">
+            <img src="img/ayam-taichan.png" alt="Ayam Taichan" />
+            <div class="omenu-info"><span class="omenu-name">Ayam Taichan</span><span class="omenu-price">Rp16.500</span></div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+          <div class="omenu-item" data-price="18000" data-key="tongkol_sambal_matah" data-label="Tongkol Sambal Matah">
+            <img src="img/tongkol-sambal-matah.png" alt="Tongkol Sambal Matah" />
+            <div class="omenu-info"><span class="omenu-name">Tongkol Sambal Matah</span><span class="omenu-price">Rp18.000</span></div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+          <div class="omenu-item" data-price="16500" data-key="oseng_bawang_teri_medan" data-label="Oseng Bawang Teri Medan">
+            <img src="img/oseng-bawang-teri-medan.png" alt="Oseng Bawang Teri Medan" />
+            <div class="omenu-info"><span class="omenu-name">Oseng Bawang Teri Medan</span><span class="omenu-price">Rp16.500</span></div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+          <div class="omenu-item" data-price="18000" data-key="cumi_asin_lombok_ijo" data-label="Cumi Asin Lombok Ijo">
+            <img src="img/cumi-asin-lombok-ijo.png" alt="Cumi Asin Lombok Ijo" />
+            <div class="omenu-info"><span class="omenu-name">Cumi Asin Lombok Ijo</span><span class="omenu-price">Rp18.000</span></div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+          <div class="omenu-item" data-price="18000" data-key="sate_lilit_ayam" data-label="Sate Lilit Ayam (3 pcs)">
+            <img src="img/sate-lilit-ayam.png" alt="Sate Lilit Ayam" />
+            <div class="omenu-info"><span class="omenu-name">Sate Lilit Ayam (3 pcs)</span><span class="omenu-price">Rp18.000</span></div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+          <div class="omenu-item" data-price="18000" data-key="kering_tempe_teri_kacang" data-label="Kering Tempe Teri Kacang">
+            <img src="img/kering-tempe-teri-kacang.png" alt="Kering Tempe Teri Kacang" />
+            <div class="omenu-info"><span class="omenu-name">Kering Tempe Teri Kacang</span><span class="omenu-price">Rp18.000</span></div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+          <div class="omenu-item" data-price="16500" data-key="cah_tauge_kulit_ayam" data-label="Cah Tauge Kulit Ayam">
+            <img src="img/cah-tauge-kulit-ayam.png" alt="Cah Tauge Kulit Ayam" />
+            <div class="omenu-info"><span class="omenu-name">Cah Tauge Kulit Ayam</span><span class="omenu-price">Rp16.500</span></div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+          <div class="omenu-item" data-price="16500" data-key="tumis_brokoli_ayam" data-label="Tumis Brokoli Ayam">
+            <img src="img/tumis-brokoli-ayam.png" alt="Tumis Brokoli Ayam" />
+            <div class="omenu-info"><span class="omenu-name">Tumis Brokoli Ayam</span><span class="omenu-price">Rp16.500</span></div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+          <div class="omenu-item" data-price="16500" data-key="pepes_telur_jamur" data-label="Pepes Telur Jamur">
+            <img src="img/pepes-telur-jamur.png" alt="Pepes Telur Jamur" />
+            <div class="omenu-info"><span class="omenu-name">Pepes Telur Jamur</span><span class="omenu-price">Rp16.500</span></div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PAKET -->
+      <div class="oform-section">
+        <h3 class="oform-title">Atau Pilih Paket Bersa.toe</h3>
+        <p class="oform-sub">Bisa dikombinasikan dengan menu satuan di atas</p>
+        <div class="opaket-grid">
+
+          <div class="opaket-item" data-price="145000" data-key="paket_a" data-label="Paket Bersa.toe A">
+            <div class="opaket-info">
+              <span class="opaket-name">BERSA.TOE A</span>
+              <span class="opaket-desc">9 menu lengkap + Free Thermal Bag</span>
+              <span class="opaket-price">Rp145.000</span>
+            </div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+          <div class="opaket-item" data-price="80000" data-key="paket_b" data-label="Paket Bersa.toe B">
+            <div class="opaket-info">
+              <span class="opaket-name">BERSA.TOE B</span>
+              <span class="opaket-desc">3 Protein + 2 Sayur</span>
+              <span class="opaket-price">Rp80.000</span>
+            </div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+          <div class="opaket-item" data-price="50000" data-key="paket_c" data-label="Paket Bersa.toe C">
+            <div class="opaket-info">
+              <span class="opaket-name">BERSA.TOE C</span>
+              <span class="opaket-desc">2 Protein + 1 Sayur</span>
+              <span class="opaket-price">Rp50.000</span>
+            </div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CATATAN -->
+      <div class="oform-section">
+        <div class="oform-group">
+          <label for="f-catatan">Catatan (opsional)</label>
+          <textarea id="f-catatan" rows="3" placeholder="Contoh: tanpa pedas, kirim sore hari, dll."></textarea>
+        </div>
+      </div>
+
+      <!-- SUMMARY -->
+      <div class="oform-summary">
+        <div class="osum-row"><span>Total Item</span><span id="oSumItem">0 item</span></div>
+        <div class="osum-row osum-total"><span>Total Harga</span><span id="oSumHarga">Rp0</span></div>
+      </div>
+
+      <!-- ERROR MSG -->
+      <div id="oFormError" style="display:none;background:rgba(194,97,74,.2);border:1px solid #C2614A;border-radius:10px;padding:12px 16px;color:#ffcfc4;font-size:13px;margin-bottom:16px;"></div>
+
+      <!-- SUBMIT -->
+      <button type="button" id="oBtnSubmit" class="obtn-submit" onclick="submitOrder()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        KIRIM ORDER VIA WHATSAPP
+      </button>
+      <p style="text-align:center;color:rgba(255,255,255,.45);font-size:12px;margin-top:12px;">Pesananmu akan tercatat otomatis dan diteruskan ke WhatsApp SA.TOEAN</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">SA.TOEAN</div>
+      <p class="footer-tagline">"Setiap Rasa Punya Cerita"</p>
+      <div class="footer-links">
+        <a class="footer-link" href="https://www.instagram.com/sa.toean" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          @sa.toean
+        </a>
+        <a class="footer-link" href="https://wa.me/6281578427171" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          +62 815-7842-7171
+        </a>
+      </div>
+      <p class="footer-copy">&#169; 2026 SA.TOEAN. Semua rasa punya cerita.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WA -->
+<a class="floating-wa"
+   href="https://wa.me/6281578427171?text=Halo+SA.TOEAN%2C+saya+ingin+order.+Mohon+informasi+menu+dan+ketersediaan."
+   target="_blank" rel="noopener" aria-label="Hubungi SA.TOEAN via WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
+
+  function filterProducts(category, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.style.display = (category === 'all' || card.dataset.category === category) ? '' : 'none';
+    });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ============================================================
+  // HERO SLIDER
+  // ============================================================
+  var heroIdx = 0;
+  var heroTotal = document.querySelectorAll('.hero-slide').length;
+  var heroTimer;
+
+  // Buat dots
+  var dotsWrap = document.getElementById('heroDots');
+  for (var i = 0; i < heroTotal; i++) {
+    var d = document.createElement('button');
+    d.className = 'hero-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i+1));
+    d.setAttribute('data-idx', i);
+    d.onclick = function() { goHero(parseInt(this.dataset.idx)); };
+    dotsWrap.appendChild(d);
+  }
+
+  function goHero(idx) {
+    heroIdx = (idx + heroTotal) % heroTotal;
+    document.getElementById('heroSlides').style.transform = 'translateX(-' + (heroIdx * 100) + '%)';
+    document.querySelectorAll('.hero-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === heroIdx);
+    });
+    clearInterval(heroTimer);
+    heroTimer = setInterval(function() { goHero(heroIdx + 1); }, 3500);
+  }
+
+  function slideHero(dir) { goHero(heroIdx + dir); }
+
+  // Auto play
+  heroTimer = setInterval(function() { goHero(heroIdx + 1); }, 3500);
+
+  // ============================================================
+  // CEK ONGKIR
+  // ============================================================
+  const ONGKIR_URL = '/.netlify/functions/ongkir';
+  const ORIGIN_ID  = '444'; // Kota Surabaya
+  var selectedOngkir = null;
+  var kotaList = [];
+  var searchTimer;
+
+  async function searchKota(val) {
+    clearTimeout(searchTimer);
+    const suggest = document.getElementById('kotaSuggest');
+    if (val.length < 2) { suggest.style.display = 'none'; return; }
+
+    searchTimer = setTimeout(async () => {
+      try {
+        const res = await fetch(ONGKIR_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'city' })
+        });
+        const data = await res.json();
+        const cities = data.rajaongkir.results;
+
+        // Filter berdasarkan input
+        const filtered = cities.filter(c =>
+          c.city_name.toLowerCase().includes(val.toLowerCase()) ||
+          c.province.toLowerCase().includes(val.toLowerCase())
+        ).slice(0, 8);
+
+        if (filtered.length === 0) { suggest.style.display = 'none'; return; }
+
+        suggest.innerHTML = filtered.map(c =>
+          `<div class="kota-suggest-item" onclick="pilihKota('${c.city_id}','${c.city_name}, ${c.province}')">
+            ${c.city_name}, ${c.province}
+          </div>`
+        ).join('');
+        suggest.style.display = 'block';
+      } catch(e) {
+        suggest.style.display = 'none';
+      }
+    }, 400);
+  }
+
+  function pilihKota(id, nama) {
+    document.getElementById('f-kota').value = nama;
+    document.getElementById('f-kota-id').value = id;
+    document.getElementById('kotaSuggest').style.display = 'none';
+    selectedOngkir = null;
+    document.getElementById('ongkirResult').style.display = 'none';
+  }
+
+  // Sembunyikan suggest kalau klik di luar
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.oform-group')) {
+      document.getElementById('kotaSuggest').style.display = 'none';
+    }
+  });
+
+  async function cekOngkir() {
+    const kotaId = document.getElementById('f-kota-id').value;
+    const kurir  = document.getElementById('f-kurir').value;
+    const result = document.getElementById('ongkirResult');
+    const btn    = document.getElementById('btnCekOngkir');
+
+    if (!kotaId) {
+      result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Pilih kota tujuan terlebih dahulu.</p>';
+      result.style.display = 'block';
+      return;
+    }
+
+    // Hitung berat berdasarkan total item (estimasi 100g per item, min 1000g)
+    const totalItem = parseInt(document.getElementById('oSumItem').textContent) || 1;
+    const weight = Math.max(totalItem * 100, 1000);
+
+    btn.disabled = true;
+    btn.textContent = 'Mengecek...';
+    result.innerHTML = '<p style="color:rgba(255,255,255,.6);font-size:13px;">Memuat data ongkir...</p>';
+    result.style.display = 'block';
+    selectedOngkir = null;
+
+    try {
+      const res = await fetch(ONGKIR_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'cost',
+          params: { origin: ORIGIN_ID, destination: kotaId, weight, courier: kurir }
+        })
+      });
+      const data = await res.json();
+      const costs = data.rajaongkir.results[0].costs;
+
+      if (!costs || costs.length === 0) {
+        result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Layanan tidak tersedia untuk rute ini.</p>';
+        return;
+      }
+
+      result.innerHTML = `
+        <p style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;">
+          Pilih layanan pengiriman:
+        </p>
+        <div class="ongkir-list">
+          ${costs.map((c, i) => `
+            <div class="ongkir-item" onclick="pilihLayanan(this,'${kurir.toUpperCase()} ${c.service}','${c.cost[0].value}','${c.cost[0].etd}')" >
+              <div class="ongkir-item-left">
+                <span class="ongkir-service">${kurir.toUpperCase()} ${c.service}</span>
+                <span class="ongkir-desc">${c.description}</span>
+                <span class="ongkir-etd">Estimasi: ${c.cost[0].etd} hari</span>
+              </div>
+              <span class="ongkir-price">Rp${parseInt(c.cost[0].value).toLocaleString('id-ID')}</span>
+            </div>
+          `).join('')}
+        </div>`;
+
+    } catch(e) {
+      result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Gagal mengambil data ongkir. Coba lagi.</p>';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Cek Ongkir';
+    }
+  }
+
+  function pilihLayanan(el, service, price, etd) {
+    document.querySelectorAll('.ongkir-item').forEach(i => i.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedOngkir = { service, price: parseInt(price), etd };
+  }
+
+  // ============================================================
+  // ORDER FORM
+  // ============================================================
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw48QaQEL6LgOo3Emn3Q3vyAEuRFPmczzpnfIhjyL3fAtw7-8wHKD1WWskRB0LeriGV/exec';
+  const WA_NUMBER = '6281578427171';
+
+  // Ubah qty item
+  function chQty(btn, delta) {
+    const wrap = btn.closest('.oqty');
+    const inp  = wrap.querySelector('.oqty-val');
+    const item = btn.closest('[data-price]');
+    let val = parseInt(inp.value) + delta;
+    if (val < 0) val = 0;
+    inp.value = val;
+    if (item) item.classList.toggle('active', val > 0);
+    updateSummary();
+  }
+
+  // Hitung & update summary
+  function updateSummary() {
+    let totalItem = 0, totalHarga = 0;
+    document.querySelectorAll('[data-price]').forEach(el => {
+      const qty   = parseInt(el.querySelector('.oqty-val').value) || 0;
+      const price = parseInt(el.dataset.price) || 0;
+      totalItem  += qty;
+      totalHarga += qty * price;
+    });
+    document.getElementById('oSumItem').textContent  = totalItem + ' item';
+    document.getElementById('oSumHarga').textContent = 'Rp' + totalHarga.toLocaleString('id-ID');
+  }
+
+  // Build pesan WA
+  function buildWAMessage(data) {
+    const lines = ['Halo SA.TOEAN, saya ingin order:', ''];
+    lines.push('Nama   : ' + data.nama);
+    lines.push('HP     : ' + data.hp);
+    lines.push('Alamat : ' + data.alamat);
+    lines.push('');
+    lines.push('--- PESANAN ---');
+
+    const menuLabels = {
+      ayam_taichan:           'Ayam Taichan (Rp16.500)',
+      tongkol_sambal_matah:   'Tongkol Sambal Matah (Rp18.000)',
+      oseng_bawang_teri_medan:'Oseng Bawang Teri Medan (Rp16.500)',
+      cumi_asin_lombok_ijo:   'Cumi Asin Lombok Ijo (Rp18.000)',
+      sate_lilit_ayam:        'Sate Lilit Ayam (Rp18.000)',
+      kering_tempe_teri_kacang:'Kering Tempe Teri Kacang (Rp18.000)',
+      cah_tauge_kulit_ayam:   'Cah Tauge Kulit Ayam (Rp16.500)',
+      tumis_brokoli_ayam:     'Tumis Brokoli Ayam (Rp16.500)',
+      pepes_telur_jamur:      'Pepes Telur Jamur (Rp16.500)',
+      paket_a:                'Paket Bersa.toe A (Rp145.000)',
+      paket_b:                'Paket Bersa.toe B (Rp80.000)',
+      paket_c:                'Paket Bersa.toe C (Rp50.000)'
+    };
+
+    let adaMenu = false;
+    Object.keys(menuLabels).forEach(key => {
+      const qty = data[key] || 0;
+      if (qty > 0) {
+        lines.push(qty + 'x ' + menuLabels[key]);
+        adaMenu = true;
+      }
+    });
+
+    if (!adaMenu) lines.push('(belum ada menu dipilih)');
+    lines.push('');
+    lines.push('Total  : ' + data.total_item + ' item - Rp' + parseInt(data.total_harga).toLocaleString('id-ID'));
+    if (selectedOngkir) {
+      lines.push('Ongkir : ' + selectedOngkir.service + ' - Rp' + selectedOngkir.price.toLocaleString('id-ID') + ' (est. ' + selectedOngkir.etd + ' hari)');
+      const grandTotal = parseInt(data.total_harga) + selectedOngkir.price;
+      lines.push('Total Bayar: Rp' + grandTotal.toLocaleString('id-ID'));
+    }
+    if (data.catatan && data.catatan !== '-') lines.push('Catatan: ' + data.catatan);
+    lines.push('');
+    lines.push('Mohon konfirmasi ketersediaan dan proses pemesanannya. Terima kasih!');
+    return lines.join('\n');
+  }
+
+  // Submit order
+  function submitOrder() {
+    const nama    = document.getElementById('f-nama').value.trim();
+    const hp      = document.getElementById('f-hp').value.trim();
+    const alamat  = document.getElementById('f-alamat').value.trim();
+    const catatan = document.getElementById('f-catatan').value.trim();
+    const errEl   = document.getElementById('oFormError');
+
+    // Validasi
+    errEl.style.display = 'none';
+    if (!nama)   { showErr('Nama lengkap wajib diisi.'); return; }
+    if (!hp)     { showErr('Nomor HP / WhatsApp wajib diisi.'); return; }
+    if (!alamat) { showErr('Alamat / kecamatan wajib diisi.'); return; }
+
+    // Kumpulkan qty semua item
+    const payload = { nama, hp, alamat, catatan: catatan || '-' };
+    let totalItem = 0, totalHarga = 0;
+
+    document.querySelectorAll('[data-price]').forEach(el => {
+      const key   = el.dataset.key;
+      const qty   = parseInt(el.querySelector('.oqty-val').value) || 0;
+      const price = parseInt(el.dataset.price) || 0;
+      payload[key]  = qty;
+      totalItem    += qty;
+      totalHarga   += qty * price;
+    });
+
+    if (totalItem === 0) { showErr('Pilih minimal 1 menu atau paket terlebih dahulu.'); return; }
+
+    payload.total_item  = totalItem;
+    payload.total_harga = totalHarga;
+
+    // Disable tombol
+    const btn = document.getElementById('oBtnSubmit');
+    btn.disabled = true;
+    btn.textContent = 'Mengirim...';
+
+    // Kirim ke Google Sheet (no-cors, fire and forget)
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(() => {});
+
+    // Buka WA (tidak tunggu fetch selesai supaya tidak diblokir browser)
+    setTimeout(() => {
+      const msg = buildWAMessage(payload);
+      window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> KIRIM ORDER VIA WHATSAPP';
+    }, 400);
+  }
+
+  // Auto-select item dan scroll ke form
+  function orderItem(key) {
+    // Set qty item yang dipilih jadi 1 jika masih 0
+    var el = document.querySelector('[data-key="' + key + '"]');
+    if (el) {
+      var inp = el.querySelector('.oqty-val');
+      if (parseInt(inp.value) === 0) {
+        inp.value = 1;
+        el.classList.add('active');
+        updateSummary();
+      }
+    }
+    // Scroll ke form
+    document.getElementById('order').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Fokus ke field nama setelah scroll
+    setTimeout(function() {
+      var nama = document.getElementById('f-nama');
+      if (nama && !nama.value) nama.focus();
+    }, 700);
+  }
+
+  function showErr(msg) {
+    const el = document.getElementById('oFormError');
+    el.textContent = msg;
+    el.style.display = 'block';
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+</script>
+
+<style>
+  /* CEK ONGKIR */
+  .kota-suggest { position: absolute; z-index: 100; background: #1a3d2b; border: 1px solid rgba(255,255,255,.2); border-radius: 10px; max-height: 200px; overflow-y: auto; width: 100%; margin-top: 4px; }
+  .kota-suggest-item { padding: 10px 14px; font-size: 13px; color: #fff; cursor: pointer; transition: background .2s; }
+  .kota-suggest-item:hover { background: rgba(201,168,76,.2); }
+  .oform-group { position: relative; }
+  .btn-cek-ongkir { background: var(--gold); color: #fff; border: none; border-radius: 50px; padding: 12px 28px; font-size: 14px; font-weight: 700; cursor: pointer; transition: background .3s, transform .3s; font-family: inherit; }
+  .btn-cek-ongkir:hover { background: #b5932f; transform: translateY(-2px); }
+  .btn-cek-ongkir:disabled { background: rgba(255,255,255,.2); cursor: not-allowed; transform: none; }
+  .ongkir-list { display: flex; flex-direction: column; gap: 8px; }
+  .ongkir-item { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: border-color .3s, background .3s; }
+  .ongkir-item:hover, .ongkir-item.selected { border-color: var(--gold); background: rgba(201,168,76,.12); }
+  .ongkir-item-left { display: flex; flex-direction: column; gap: 2px; }
+  .ongkir-service { font-size: 13px; font-weight: 700; color: #fff; }
+  .ongkir-desc { font-size: 11px; color: rgba(255,255,255,.6); }
+  .ongkir-price { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); }
+  .ongkir-etd { font-size: 11px; color: rgba(255,255,255,.5); text-align: right; }
+  select#f-kurir { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 10px; padding: 12px 14px; color: #fff; font-size: 14px; font-family: inherit; outline: none; width: 100%; cursor: pointer; }
+  select#f-kurir option { background: #075B3D; color: #fff; }
+
+
+  .oform { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; padding: 36px 32px; max-width: 860px; margin: 0 auto; }
+  .oform-section { margin-bottom: 32px; }
+  .oform-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: #fff; margin-bottom: 4px; }
+  .oform-sub { font-size: 12px; color: rgba(255,255,255,.5); margin-bottom: 16px; }
+  .oform-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .oform-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .oform-group label { font-size: 12px; font-weight: 700; letter-spacing: .06em; color: rgba(255,255,255,.7); text-transform: uppercase; }
+  .oform-group input, .oform-group textarea { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 10px; padding: 12px 14px; color: #fff; font-size: 14px; font-family: inherit; outline: none; transition: border-color .3s; width: 100%; }
+  .oform-group input::placeholder, .oform-group textarea::placeholder { color: rgba(255,255,255,.35); }
+  .oform-group input:focus, .oform-group textarea:focus { border-color: #C9A84C; }
+  .oform-group textarea { resize: vertical; }
+  .omenu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .omenu-item { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; overflow: hidden; transition: border-color .3s, background .3s; }
+  .omenu-item.active { border-color: #C9A84C; background: rgba(201,168,76,.12); }
+  .omenu-item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+  .omenu-info { padding: 8px 10px 4px; }
+  .omenu-name { display: block; font-size: 12px; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: 2px; }
+  .omenu-price { display: block; font-size: 11px; color: #C9A84C; font-weight: 700; }
+  .opaket-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .opaket-item { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; transition: border-color .3s, background .3s; }
+  .opaket-item.active { border-color: #C9A84C; background: rgba(201,168,76,.12); }
+  .opaket-name { display: block; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #C9A84C; margin-bottom: 4px; }
+  .opaket-desc { display: block; font-size: 11px; color: rgba(255,255,255,.65); margin-bottom: 6px; line-height: 1.5; }
+  .opaket-price { display: block; font-size: 1.1rem; font-weight: 700; color: #fff; }
+  .oqty { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px; }
+  .oqty button { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.1); color: #fff; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .3s; line-height: 1; }
+  .oqty button:hover { background: #C9A84C; border-color: #C9A84C; }
+  .oqty-val { width: 36px; text-align: center; background: transparent; border: none; color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; }
+  .oform-summary { background: rgba(0,0,0,.2); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
+  .osum-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: rgba(255,255,255,.75); }
+  .osum-total { font-size: 1.2rem; font-weight: 700; color: #fff; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.1); margin-top: 4px; }
+  .osum-total span:last-child { color: #C9A84C; font-family: 'Playfair Display', serif; }
+  .obtn-submit { width: 100%; padding: 16px; border-radius: 50px; background: #25D366; color: #fff; font-size: 15px; font-weight: 700; letter-spacing: .05em; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; border: none; font-family: inherit; transition: background .3s, transform .3s, box-shadow .3s; }
+  .obtn-submit:hover { background: #1db954; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,.4); }
+  .obtn-submit:disabled { background: rgba(255,255,255,.2); cursor: not-allowed; transform: none; box-shadow: none; }
+  @media (max-width: 700px) { .oform { padding: 24px 16px; } .oform-row { grid-template-columns: 1fr; } .omenu-grid { grid-template-columns: repeat(2, 1fr); } .opaket-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 400px) { .omenu-grid { grid-template-columns: 1fr; } }
+</style>
+
+</body>
+</html>
