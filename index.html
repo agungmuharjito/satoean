@@ -1130,90 +1130,50 @@
   // CEK ONGKIR - Binderbyte
   // ============================================================
   const ONGKIR_URL = '/.netlify/functions/ongkir';
-  const ORIGIN_ID  = '498'; // Kota Surabaya - Binderbyte ID
+  const ORIGIN_ID  = '498'; // Kota Surabaya
+  var selectedOngkir = null;
+  var searchTimer;  // ============================================================
+  // CEK ONGKIR - Binderbyte
+  // ============================================================
+  const ONGKIR_URL = '/.netlify/functions/ongkir';
+  const ORIGIN_ID  = '498'; // Surabaya
   var selectedOngkir = null;
   var searchTimer;
   var allCities = [];
 
-  // Load semua kota saat halaman dibuka
-  async function loadCities() {
+  async function loadAllCities() {
     try {
-      // Load provinsi dulu untuk dapat semua kota
       const res = await fetch(ONGKIR_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'province' })
+        body: JSON.stringify({ action: 'allcity' })
       });
       const data = await res.json();
-      if (data.code == 200 && data.value) {
-        // Simpan provinsi untuk referensi
-        window._provinces = data.value;
-      }
+      if (data.code == 200 && data.value) allCities = data.value;
     } catch(e) {}
   }
-  loadCities();
+  loadAllCities();
 
-  async function searchKota(val) {
+  function searchKota(val) {
     clearTimeout(searchTimer);
     const suggest = document.getElementById('kotaSuggest');
     if (val.length < 2) { suggest.style.display = 'none'; return; }
-
-    searchTimer = setTimeout(async () => {
-      try {
-        // Cari dari semua provinsi yang cocok atau load kota
-        // Untuk Binderbyte kita cari berdasarkan nama kota langsung
-        const res = await fetch(ONGKIR_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'city_search', params: { keyword: val } })
-        });
-
-        // Fallback: tampilkan provinsi dulu kalau city search tidak ada
-        if (!window._provinces) { suggest.style.display = 'none'; return; }
-
-        const filtered = window._provinces.filter(p =>
-          p.name.toLowerCase().includes(val.toLowerCase())
-        ).slice(0, 8);
-
-        if (filtered.length > 0) {
-          suggest.innerHTML = filtered.map(p =>
-            `<div class="kota-suggest-item" onclick="loadKotaByProvinsi('${p.id}','${p.name}')">
-              ${p.name}
-            </div>`
-          ).join('');
-          suggest.style.display = 'block';
-        } else {
-          suggest.style.display = 'none';
-        }
-      } catch(e) {
-        suggest.style.display = 'none';
-      }
-    }, 400);
-  }
-
-  async function loadKotaByProvinsi(provId, provName) {
-    const suggest = document.getElementById('kotaSuggest');
-    suggest.innerHTML = '<div class="kota-suggest-item">Memuat kota...</div>';
-
-    try {
-      const res = await fetch(ONGKIR_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'city', params: { province_id: provId } })
-      });
-      const data = await res.json();
-
-      if (data.code == 200 && data.value) {
-        suggest.innerHTML = data.value.map(c =>
-          `<div class="kota-suggest-item" onclick="pilihKota('${c.id}','${c.name}, ${provName}')">
-            ${c.name}
-          </div>`
-        ).join('');
-        suggest.style.display = 'block';
-      }
-    } catch(e) {
-      suggest.style.display = 'none';
+    if (allCities.length === 0) {
+      suggest.innerHTML = '<div class="kota-suggest-item">Memuat data kota...</div>';
+      suggest.style.display = 'block';
+      return;
     }
+    const filtered = allCities.filter(c =>
+      c.name.toLowerCase().includes(val.toLowerCase()) ||
+      c.province.toLowerCase().includes(val.toLowerCase())
+    ).slice(0, 10);
+    if (filtered.length === 0) { suggest.style.display = 'none'; return; }
+    suggest.innerHTML = filtered.map(c =>
+      `<div class="kota-suggest-item" onclick="pilihKota('${c.id}','${c.name}, ${c.province}')">
+        ${c.name}, <span style="opacity:.6">${c.province}</span>
+      </div>`
+    ).join('');
+    suggest.style.display = 'block';
   }
 
   function pilihKota(id, nama) {
@@ -1237,7 +1197,7 @@
     const btn    = document.getElementById('btnCekOngkir');
 
     if (!kotaId) {
-      result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Pilih kota tujuan terlebih dahulu.</p>';
+      result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Pilih kota dari daftar saran yang muncul saat mengetik.</p>';
       result.style.display = 'block';
       return;
     }
@@ -1261,16 +1221,12 @@
         })
       });
       const data = await res.json();
-
       if (data.code != 200 || !data.value || !data.value.length) {
-        result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Layanan tidak tersedia untuk rute ini. Coba kurir lain.</p>';
+        result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Layanan tidak tersedia. Coba kurir lain.</p>';
         return;
       }
-
       result.innerHTML = `
-        <p style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;">
-          Pilih layanan pengiriman:
-        </p>
+        <p style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;">Pilih layanan:</p>
         <div class="ongkir-list">
           ${data.value.map(c => `
             <div class="ongkir-item" onclick="pilihLayanan(this,'${kurir.toUpperCase()} ${c.service}','${c.cost}','${c.etd}')">
@@ -1280,135 +1236,10 @@
                 <span class="ongkir-etd">Estimasi: ${c.etd} hari</span>
               </div>
               <span class="ongkir-price">Rp${parseInt(c.cost).toLocaleString('id-ID')}</span>
-            </div>
-          `).join('')}
+            </div>`).join('')}
         </div>`;
-
     } catch(e) {
-      result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Gagal mengambil data ongkir. Coba lagi.</p>';
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Cek Ongkir';
-    }
-  }
-
-  function pilihLayanan(el, service, price, etd) {
-    document.querySelectorAll('.ongkir-item').forEach(i => i.classList.remove('selected'));
-    el.classList.add('selected');
-    selectedOngkir = { service, price: parseInt(price), etd };
-  }
-  var selectedOngkir = null;
-  var kotaList = [];
-  var searchTimer;
-
-  async function searchKota(val) {
-    clearTimeout(searchTimer);
-    const suggest = document.getElementById('kotaSuggest');
-    if (val.length < 2) { suggest.style.display = 'none'; return; }
-
-    searchTimer = setTimeout(async () => {
-      try {
-        const res = await fetch(ONGKIR_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'city' })
-        });
-        const data = await res.json();
-        const cities = data.rajaongkir.results;
-
-        // Filter berdasarkan input
-        const filtered = cities.filter(c =>
-          c.city_name.toLowerCase().includes(val.toLowerCase()) ||
-          c.province.toLowerCase().includes(val.toLowerCase())
-        ).slice(0, 8);
-
-        if (filtered.length === 0) { suggest.style.display = 'none'; return; }
-
-        suggest.innerHTML = filtered.map(c =>
-          `<div class="kota-suggest-item" onclick="pilihKota('${c.city_id}','${c.city_name}, ${c.province}')">
-            ${c.city_name}, ${c.province}
-          </div>`
-        ).join('');
-        suggest.style.display = 'block';
-      } catch(e) {
-        suggest.style.display = 'none';
-      }
-    }, 400);
-  }
-
-  function pilihKota(id, nama) {
-    document.getElementById('f-kota').value = nama;
-    document.getElementById('f-kota-id').value = id;
-    document.getElementById('kotaSuggest').style.display = 'none';
-    selectedOngkir = null;
-    document.getElementById('ongkirResult').style.display = 'none';
-  }
-
-  // Sembunyikan suggest kalau klik di luar
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.oform-group')) {
-      document.getElementById('kotaSuggest').style.display = 'none';
-    }
-  });
-
-  async function cekOngkir() {
-    const kotaId = document.getElementById('f-kota-id').value;
-    const kurir  = document.getElementById('f-kurir').value;
-    const result = document.getElementById('ongkirResult');
-    const btn    = document.getElementById('btnCekOngkir');
-
-    if (!kotaId) {
-      result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Pilih kota tujuan terlebih dahulu.</p>';
-      result.style.display = 'block';
-      return;
-    }
-
-    // Hitung berat berdasarkan total item (estimasi 100g per item, min 1000g)
-    const totalItem = parseInt(document.getElementById('oSumItem').textContent) || 1;
-    const weight = Math.max(totalItem * 100, 1000);
-
-    btn.disabled = true;
-    btn.textContent = 'Mengecek...';
-    result.innerHTML = '<p style="color:rgba(255,255,255,.6);font-size:13px;">Memuat data ongkir...</p>';
-    result.style.display = 'block';
-    selectedOngkir = null;
-
-    try {
-      const res = await fetch(ONGKIR_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'cost',
-          params: { origin: ORIGIN_ID, destination: kotaId, weight, courier: kurir }
-        })
-      });
-      const data = await res.json();
-      const costs = data.rajaongkir.results[0].costs;
-
-      if (!costs || costs.length === 0) {
-        result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Layanan tidak tersedia untuk rute ini.</p>';
-        return;
-      }
-
-      result.innerHTML = `
-        <p style="font-size:12px;color:rgba(255,255,255,.6);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;">
-          Pilih layanan pengiriman:
-        </p>
-        <div class="ongkir-list">
-          ${costs.map((c, i) => `
-            <div class="ongkir-item" onclick="pilihLayanan(this,'${kurir.toUpperCase()} ${c.service}','${c.cost[0].value}','${c.cost[0].etd}')" >
-              <div class="ongkir-item-left">
-                <span class="ongkir-service">${kurir.toUpperCase()} ${c.service}</span>
-                <span class="ongkir-desc">${c.description}</span>
-                <span class="ongkir-etd">Estimasi: ${c.cost[0].etd} hari</span>
-              </div>
-              <span class="ongkir-price">Rp${parseInt(c.cost[0].value).toLocaleString('id-ID')}</span>
-            </div>
-          `).join('')}
-        </div>`;
-
-    } catch(e) {
-      result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Gagal mengambil data ongkir. Coba lagi.</p>';
+      result.innerHTML = '<p style="color:#ffcfc4;font-size:13px;">Gagal mengambil data. Coba lagi.</p>';
     } finally {
       btn.disabled = false;
       btn.textContent = 'Cek Ongkir';
