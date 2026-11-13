@@ -39,29 +39,21 @@ exports.handler = async function(event) {
       result = await httpsGet(`${BASE}/wilayah/kabupaten?api_key=${KEY}&id_provinsi=${params.province_id}`);
 
     } else if (action === 'search') {
-      // Cari kota berdasarkan keyword - ambil semua kota dari semua provinsi lalu filter
+      const keyword = (params.keyword || '').toLowerCase();
+
+      // Ambil semua provinsi dulu
       const provRes = await httpsGet(`${BASE}/wilayah/provinsi?api_key=${KEY}`);
       const provData = JSON.parse(provRes);
       if (provData.code != 200) {
         return { statusCode: 200, headers: { ...cors, 'Content-Type': 'application/json' }, body: JSON.stringify({ code: 500 }) };
       }
 
-      const keyword = (params.keyword || '').toLowerCase();
-      
-      // Filter provinsi yang cocok dulu untuk batasi request
-      const matchedProvs = provData.value.filter(p => 
-        p.name.toLowerCase().includes(keyword)
-      );
-      
-      // Juga ambil semua provinsi tapi filter kotanya
-      const allProvs = provData.value;
-      
-      // Ambil kota dari semua provinsi secara parallel tapi batasi
-      const cityPromises = allProvs.slice(0, 10).map(p =>
+      // Ambil kota dari semua provinsi parallel
+      const cityPromises = provData.value.map(p =>
         httpsGet(`${BASE}/wilayah/kabupaten?api_key=${KEY}&id_provinsi=${p.id}`)
           .then(r => {
             const d = JSON.parse(r);
-            return (d.code == 200 && d.value) 
+            return (d.code == 200 && d.value)
               ? d.value
                   .filter(c => c.name.toLowerCase().includes(keyword))
                   .map(c => ({ id: c.id, name: c.name, province: p.name }))
