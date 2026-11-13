@@ -1,7 +1,6 @@
 const https = require('https');
 
 exports.handler = async function(event) {
-  // Handle preflight CORS
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
@@ -20,34 +19,31 @@ exports.handler = async function(event) {
 
   try {
     const { action, params } = JSON.parse(event.body);
-    const API_KEY = process.env.RAJAONGKIR_KEY;
+    const API_KEY = process.env.BINDERBYTE_KEY;
 
-    // Tentukan endpoint berdasarkan action
     let path = '';
-    let postData = '';
 
-    if (action === 'city') {
-      path = '/starter/city';
-      if (params && params.id) path += '?id=' + params.id;
+    if (action === 'province') {
+      path = '/v1/wilayah/provinsi?api_key=' + API_KEY;
+    } else if (action === 'city') {
+      path = '/v1/wilayah/kabupaten?api_key=' + API_KEY + '&id_provinsi=' + params.province_id;
     } else if (action === 'cost') {
-      path = '/starter/cost';
-      postData = `origin=${params.origin}&destination=${params.destination}&weight=${params.weight || 1000}&courier=${params.courier}`;
+      path = '/v1/cek_ongkir?api_key=' + API_KEY +
+             '&kurir=' + params.courier +
+             '&berat=' + (params.weight || 1000) +
+             '&asal=' + params.origin +
+             '&tujuan=' + params.destination;
     } else {
       return { statusCode: 400, body: JSON.stringify({ error: 'Invalid action' }) };
     }
 
     const result = await new Promise((resolve, reject) => {
       const options = {
-        hostname: 'api.rajaongkir.com',
+        hostname: 'api.binderbyte.com',
         path,
-        method: action === 'cost' ? 'POST' : 'GET',
-        headers: {
-          'key': API_KEY,
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
       };
-
-      if (postData) options.headers['Content-Length'] = Buffer.byteLength(postData);
 
       const req = https.request(options, (res) => {
         let data = '';
@@ -56,7 +52,6 @@ exports.handler = async function(event) {
       });
 
       req.on('error', reject);
-      if (postData) req.write(postData);
       req.end();
     });
 
