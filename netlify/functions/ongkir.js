@@ -1,5 +1,43 @@
 const https = require('https');
 
+// Data kota Indonesia (ID Binderbyte)
+const CITIES = [
+  {id:"1",name:"Aceh Barat",province:"Aceh"},{id:"2",name:"Aceh Barat Daya",province:"Aceh"},{id:"3",name:"Aceh Besar",province:"Aceh"},{id:"4",name:"Aceh Jaya",province:"Aceh"},{id:"5",name:"Aceh Selatan",province:"Aceh"},{id:"6",name:"Aceh Singkil",province:"Aceh"},{id:"7",name:"Aceh Tamiang",province:"Aceh"},{id:"8",name:"Aceh Tengah",province:"Aceh"},{id:"9",name:"Aceh Tenggara",province:"Aceh"},{id:"10",name:"Aceh Timur",province:"Aceh"},{id:"11",name:"Aceh Utara",province:"Aceh"},{id:"12",name:"Banda Aceh",province:"Aceh"},{id:"13",name:"Bener Meriah",province:"Aceh"},{id:"14",name:"Bireuen",province:"Aceh"},{id:"15",name:"Gayo Lues",province:"Aceh"},{id:"16",name:"Langsa",province:"Aceh"},{id:"17",name:"Lhokseumawe",province:"Aceh"},{id:"18",name:"Nagan Raya",province:"Aceh"},{id:"19",name:"Pidie",province:"Aceh"},{id:"20",name:"Pidie Jaya",province:"Aceh"},{id:"21",name:"Sabang",province:"Aceh"},{id:"22",name:"Simeulue",province:"Aceh"},{id:"23",name:"Subulussalam",province:"Aceh"},
+  {id:"24",name:"Asahan",province:"Sumatera Utara"},{id:"25",name:"Batubara",province:"Sumatera Utara"},{id:"26",name:"Binjai",province:"Sumatera Utara"},{id:"27",name:"Dairi",province:"Sumatera Utara"},{id:"28",name:"Deli Serdang",province:"Sumatera Utara"},{id:"29",name:"Gunungsitoli",province:"Sumatera Utara"},{id:"30",name:"Humbang Hasundutan",province:"Sumatera Utara"},{id:"31",name:"Karo",province:"Sumatera Utara"},{id:"32",name:"Labuhanbatu",province:"Sumatera Utara"},{id:"33",name:"Labuhanbatu Selatan",province:"Sumatera Utara"},{id:"34",name:"Labuhanbatu Utara",province:"Sumatera Utara"},{id:"35",name:"Langkat",province:"Sumatera Utara"},{id:"36",name:"Mandailing Natal",province:"Sumatera Utara"},{id:"37",name:"Medan",province:"Sumatera Utara"},{id:"38",name:"Nias",province:"Sumatera Utara"},{id:"39",name:"Nias Barat",province:"Sumatera Utara"},{id:"40",name:"Nias Selatan",province:"Sumatera Utara"},{id:"41",name:"Nias Utara",province:"Sumatera Utara"},{id:"42",name:"Padang Lawas",province:"Sumatera Utara"},{id:"43",name:"Padang Lawas Utara",province:"Sumatera Utara"},{id:"44",name:"Padang Sidempuan",province:"Sumatera Utara"},{id:"45",name:"Pakpak Bharat",province:"Sumatera Utara"},{id:"46",name:"Pematangsiantar",province:"Sumatera Utara"},{id:"47",name:"Samosir",province:"Sumatera Utara"},{id:"48",name:"Serdang Bedagai",province:"Sumatera Utara"},{id:"49",name:"Sibolga",province:"Sumatera Utara"},{id:"50",name:"Simalungun",province:"Sumatera Utara"},{id:"51",name:"Tanjungbalai",province:"Sumatera Utara"},{id:"52",name:"Tapanuli Selatan",province:"Sumatera Utara"},{id:"53",name:"Tapanuli Tengah",province:"Sumatera Utara"},{id:"54",name:"Tapanuli Utara",province:"Sumatera Utara"},{id:"55",name:"Tebing Tinggi",province:"Sumatera Utara"},{id:"56",name:"Toba Samosir",province:"Sumatera Utara"},
+  {id:"57",name:"Agam",province:"Sumatera Barat"},{id:"58",name:"Bukittinggi",province:"Sumatera Barat"},{id:"59",name:"Dharmasraya",province:"Sumatera Barat"},{id:"60",name:"Kepulauan Mentawai",province:"Sumatera Barat"},{id:"61",name:"Lima Puluh Kota",province:"Sumatera Barat"},{id:"62",name:"Padang",province:"Sumatera Barat"},{id:"63",name:"Padang Panjang",province:"Sumatera Barat"},{id:"64",name:"Padang Pariaman",province:"Sumatera Barat"},{id:"65",name:"Pariaman",province:"Sumatera Barat"},{id:"66",name:"Pasaman",province:"Sumatera Barat"},{id:"67",name:"Pasaman Barat",province:"Sumatera Barat"},{id:"68",name:"Payakumbuh",province:"Sumatera Barat"},{id:"69",name:"Pesisir Selatan",province:"Sumatera Barat"},{id:"70",name:"Sawahlunto",province:"Sumatera Barat"},{id:"71",name:"Sijunjung",province:"Sumatera Barat"},{id:"72",name:"Solok",province:"Sumatera Barat"},{id:"73",name:"Solok Selatan",province:"Sumatera Barat"},{id:"74",name:"Tanah Datar",province:"Sumatera Barat"},
+  {id:"75",name:"Bengkalis",province:"Riau"},{id:"76",name:"Dumai",province:"Riau"},{id:"77",name:"Indragiri Hilir",province:"Riau"},{id:"78",name:"Indragiri Hulu",province:"Riau"},{id:"79",name:"Kampar",province:"Riau"},{id:"80",name:"Kepulauan Meranti",province:"Riau"},{id:"81",name:"Kuantan Singingi",province:"Riau"},{id:"82",name:"Pekanbaru",province:"Riau"},{id:"83",name:"Pelalawan",province:"Riau"},{id:"84",name:"Rokan Hilir",province:"Riau"},{id:"85",name:"Rokan Hulu",province:"Riau"},{id:"86",name:"Siak",province:"Riau"},
+  {id:"87",name:"Batam",province:"Kepulauan Riau"},{id:"88",name:"Bintan",province:"Kepulauan Riau"},{id:"89",name:"Karimun",province:"Kepulauan Riau"},{id:"90",name:"Kepulauan Anambas",province:"Kepulauan Riau"},{id:"91",name:"Lingga",province:"Kepulauan Riau"},{id:"92",name:"Natuna",province:"Kepulauan Riau"},{id:"93",name:"Tanjungpinang",province:"Kepulauan Riau"},
+  {id:"94",name:"Bungo",province:"Jambi"},{id:"95",name:"Jambi",province:"Jambi"},{id:"96",name:"Kerinci",province:"Jambi"},{id:"97",name:"Merangin",province:"Jambi"},{id:"98",name:"Muaro Jambi",province:"Jambi"},{id:"99",name:"Sarolangun",province:"Jambi"},{id:"100",name:"Sungai Penuh",province:"Jambi"},{id:"101",name:"Tanjung Jabung Barat",province:"Jambi"},{id:"102",name:"Tanjung Jabung Timur",province:"Jambi"},{id:"103",name:"Tebo",province:"Jambi"},
+  {id:"104",name:"Empat Lawang",province:"Sumatera Selatan"},{id:"105",name:"Lahat",province:"Sumatera Selatan"},{id:"106",name:"Lubuklinggau",province:"Sumatera Selatan"},{id:"107",name:"Muara Enim",province:"Sumatera Selatan"},{id:"108",name:"Musi Banyuasin",province:"Sumatera Selatan"},{id:"109",name:"Musi Rawas",province:"Sumatera Selatan"},{id:"110",name:"Musi Rawas Utara",province:"Sumatera Selatan"},{id:"111",name:"Ogan Ilir",province:"Sumatera Selatan"},{id:"112",name:"Ogan Komering Ilir",province:"Sumatera Selatan"},{id:"113",name:"Ogan Komering Ulu",province:"Sumatera Selatan"},{id:"114",name:"Ogan Komering Ulu Selatan",province:"Sumatera Selatan"},{id:"115",name:"Ogan Komering Ulu Timur",province:"Sumatera Selatan"},{id:"116",name:"Pagar Alam",province:"Sumatera Selatan"},{id:"117",name:"Palembang",province:"Sumatera Selatan"},{id:"118",name:"Penukal Abab Lematang Ilir",province:"Sumatera Selatan"},{id:"119",name:"Prabumulih",province:"Sumatera Selatan"},
+  {id:"120",name:"Bengkulu",province:"Bengkulu"},{id:"121",name:"Bengkulu Selatan",province:"Bengkulu"},{id:"122",name:"Bengkulu Tengah",province:"Bengkulu"},{id:"123",name:"Bengkulu Utara",province:"Bengkulu"},{id:"124",name:"Kaur",province:"Bengkulu"},{id:"125",name:"Kepahiang",province:"Bengkulu"},{id:"126",name:"Lebong",province:"Bengkulu"},{id:"127",name:"Mukomuko",province:"Bengkulu"},{id:"128",name:"Rejang Lebong",province:"Bengkulu"},{id:"129",name:"Seluma",province:"Bengkulu"},
+  {id:"130",name:"Bandar Lampung",province:"Lampung"},{id:"131",name:"Lampung Barat",province:"Lampung"},{id:"132",name:"Lampung Selatan",province:"Lampung"},{id:"133",name:"Lampung Tengah",province:"Lampung"},{id:"134",name:"Lampung Timur",province:"Lampung"},{id:"135",name:"Lampung Utara",province:"Lampung"},{id:"136",name:"Mesuji",province:"Lampung"},{id:"137",name:"Metro",province:"Lampung"},{id:"138",name:"Pesawaran",province:"Lampung"},{id:"139",name:"Pesisir Barat",province:"Lampung"},{id:"140",name:"Pringsewu",province:"Lampung"},{id:"141",name:"Tanggamus",province:"Lampung"},{id:"142",name:"Tulangbawang",province:"Lampung"},{id:"143",name:"Tulangbawang Barat",province:"Lampung"},{id:"144",name:"Way Kanan",province:"Lampung"},
+  {id:"145",name:"Bangka",province:"Bangka Belitung"},{id:"146",name:"Bangka Barat",province:"Bangka Belitung"},{id:"147",name:"Bangka Selatan",province:"Bangka Belitung"},{id:"148",name:"Bangka Tengah",province:"Bangka Belitung"},{id:"149",name:"Belitung",province:"Bangka Belitung"},{id:"150",name:"Belitung Timur",province:"Bangka Belitung"},{id:"151",name:"Pangkalpinang",province:"Bangka Belitung"},
+  {id:"152",name:"Jakarta Barat",province:"DKI Jakarta"},{id:"153",name:"Jakarta Pusat",province:"DKI Jakarta"},{id:"154",name:"Jakarta Selatan",province:"DKI Jakarta"},{id:"155",name:"Jakarta Timur",province:"DKI Jakarta"},{id:"156",name:"Jakarta Utara",province:"DKI Jakarta"},{id:"157",name:"Kepulauan Seribu",province:"DKI Jakarta"},
+  {id:"158",name:"Badung",province:"Bali"},{id:"159",name:"Bangli",province:"Bali"},{id:"160",name:"Buleleng",province:"Bali"},{id:"161",name:"Denpasar",province:"Bali"},{id:"162",name:"Gianyar",province:"Bali"},{id:"163",name:"Jembrana",province:"Bali"},{id:"164",name:"Karangasem",province:"Bali"},{id:"165",name:"Klungkung",province:"Bali"},{id:"166",name:"Tabanan",province:"Bali"},
+  {id:"167",name:"Bandung",province:"Jawa Barat"},{id:"168",name:"Bandung Barat",province:"Jawa Barat"},{id:"169",name:"Bekasi",province:"Jawa Barat"},{id:"170",name:"Bogor",province:"Jawa Barat"},{id:"171",name:"Ciamis",province:"Jawa Barat"},{id:"172",name:"Cianjur",province:"Jawa Barat"},{id:"173",name:"Cimahi",province:"Jawa Barat"},{id:"174",name:"Cirebon",province:"Jawa Barat"},{id:"175",name:"Depok",province:"Jawa Barat"},{id:"176",name:"Garut",province:"Jawa Barat"},{id:"177",name:"Indramayu",province:"Jawa Barat"},{id:"178",name:"Karawang",province:"Jawa Barat"},{id:"179",name:"Kuningan",province:"Jawa Barat"},{id:"180",name:"Majalengka",province:"Jawa Barat"},{id:"181",name:"Pangandaran",province:"Jawa Barat"},{id:"182",name:"Purwakarta",province:"Jawa Barat"},{id:"183",name:"Subang",province:"Jawa Barat"},{id:"184",name:"Sukabumi",province:"Jawa Barat"},{id:"185",name:"Sumedang",province:"Jawa Barat"},{id:"186",name:"Tasikmalaya",province:"Jawa Barat"},
+  {id:"187",name:"Banjarnegara",province:"Jawa Tengah"},{id:"188",name:"Banyumas",province:"Jawa Tengah"},{id:"189",name:"Batang",province:"Jawa Tengah"},{id:"190",name:"Blora",province:"Jawa Tengah"},{id:"191",name:"Boyolali",province:"Jawa Tengah"},{id:"192",name:"Brebes",province:"Jawa Tengah"},{id:"193",name:"Cilacap",province:"Jawa Tengah"},{id:"194",name:"Demak",province:"Jawa Tengah"},{id:"195",name:"Grobogan",province:"Jawa Tengah"},{id:"196",name:"Jepara",province:"Jawa Tengah"},{id:"197",name:"Karanganyar",province:"Jawa Tengah"},{id:"198",name:"Kebumen",province:"Jawa Tengah"},{id:"199",name:"Kendal",province:"Jawa Tengah"},{id:"200",name:"Klaten",province:"Jawa Tengah"},{id:"201",name:"Kudus",province:"Jawa Tengah"},{id:"202",name:"Magelang",province:"Jawa Tengah"},{id:"203",name:"Pati",province:"Jawa Tengah"},{id:"204",name:"Pekalongan",province:"Jawa Tengah"},{id:"205",name:"Pemalang",province:"Jawa Tengah"},{id:"206",name:"Purbalingga",province:"Jawa Tengah"},{id:"207",name:"Purworejo",province:"Jawa Tengah"},{id:"208",name:"Rembang",province:"Jawa Tengah"},{id:"209",name:"Salatiga",province:"Jawa Tengah"},{id:"210",name:"Semarang",province:"Jawa Tengah"},{id:"211",name:"Sragen",province:"Jawa Tengah"},{id:"212",name:"Sukoharjo",province:"Jawa Tengah"},{id:"213",name:"Surakarta",province:"Jawa Tengah"},{id:"214",name:"Tegal",province:"Jawa Tengah"},{id:"215",name:"Temanggung",province:"Jawa Tengah"},{id:"216",name:"Wonogiri",province:"Jawa Tengah"},{id:"217",name:"Wonosobo",province:"Jawa Tengah"},
+  {id:"218",name:"Bantul",province:"DI Yogyakarta"},{id:"219",name:"Gunungkidul",province:"DI Yogyakarta"},{id:"220",name:"Kulon Progo",province:"DI Yogyakarta"},{id:"221",name:"Sleman",province:"DI Yogyakarta"},{id:"222",name:"Yogyakarta",province:"DI Yogyakarta"},
+  {id:"223",name:"Bangkalan",province:"Jawa Timur"},{id:"224",name:"Banyuwangi",province:"Jawa Timur"},{id:"225",name:"Blitar",province:"Jawa Timur"},{id:"226",name:"Bojonegoro",province:"Jawa Timur"},{id:"227",name:"Bondowoso",province:"Jawa Timur"},{id:"228",name:"Gresik",province:"Jawa Timur"},{id:"229",name:"Jember",province:"Jawa Timur"},{id:"230",name:"Jombang",province:"Jawa Timur"},{id:"231",name:"Kediri",province:"Jawa Timur"},{id:"232",name:"Lamongan",province:"Jawa Timur"},{id:"233",name:"Lumajang",province:"Jawa Timur"},{id:"234",name:"Madiun",province:"Jawa Timur"},{id:"235",name:"Magetan",province:"Jawa Timur"},{id:"236",name:"Malang",province:"Jawa Timur"},{id:"237",name:"Mojokerto",province:"Jawa Timur"},{id:"238",name:"Nganjuk",province:"Jawa Timur"},{id:"239",name:"Ngawi",province:"Jawa Timur"},{id:"240",name:"Pacitan",province:"Jawa Timur"},{id:"241",name:"Pamekasan",province:"Jawa Timur"},{id:"242",name:"Pasuruan",province:"Jawa Timur"},{id:"243",name:"Ponorogo",province:"Jawa Timur"},{id:"244",name:"Probolinggo",province:"Jawa Timur"},{id:"245",name:"Sampang",province:"Jawa Timur"},{id:"246",name:"Sidoarjo",province:"Jawa Timur"},{id:"247",name:"Situbondo",province:"Jawa Timur"},{id:"248",name:"Sumenep",province:"Jawa Timur"},{id:"249",name:"Surabaya",province:"Jawa Timur"},{id:"250",name:"Trenggalek",province:"Jawa Timur"},{id:"251",name:"Tuban",province:"Jawa Timur"},{id:"252",name:"Tulungagung",province:"Jawa Timur"},
+  {id:"253",name:"Lebak",province:"Banten"},{id:"254",name:"Pandeglang",province:"Banten"},{id:"255",name:"Serang",province:"Banten"},{id:"256",name:"Tangerang",province:"Banten"},{id:"257",name:"Tangerang Selatan",province:"Banten"},{id:"258",name:"Cilegon",province:"Banten"},
+  {id:"259",name:"Dompu",province:"Nusa Tenggara Barat"},{id:"260",name:"Bima",province:"Nusa Tenggara Barat"},{id:"261",name:"Lombok Barat",province:"Nusa Tenggara Barat"},{id:"262",name:"Lombok Tengah",province:"Nusa Tenggara Barat"},{id:"263",name:"Lombok Timur",province:"Nusa Tenggara Barat"},{id:"264",name:"Lombok Utara",province:"Nusa Tenggara Barat"},{id:"265",name:"Mataram",province:"Nusa Tenggara Barat"},{id:"266",name:"Sumbawa",province:"Nusa Tenggara Barat"},{id:"267",name:"Sumbawa Barat",province:"Nusa Tenggara Barat"},
+  {id:"268",name:"Alor",province:"Nusa Tenggara Timur"},{id:"269",name:"Belu",province:"Nusa Tenggara Timur"},{id:"270",name:"Ende",province:"Nusa Tenggara Timur"},{id:"271",name:"Flores Timur",province:"Nusa Tenggara Timur"},{id:"272",name:"Kupang",province:"Nusa Tenggara Timur"},{id:"273",name:"Lembata",province:"Nusa Tenggara Timur"},{id:"274",name:"Manggarai",province:"Nusa Tenggara Timur"},{id:"275",name:"Manggarai Barat",province:"Nusa Tenggara Timur"},{id:"276",name:"Manggarai Timur",province:"Nusa Tenggara Timur"},{id:"277",name:"Nagekeo",province:"Nusa Tenggara Timur"},{id:"278",name:"Ngada",province:"Nusa Tenggara Timur"},{id:"279",name:"Rote Ndao",province:"Nusa Tenggara Timur"},{id:"280",name:"Sabu Raijua",province:"Nusa Tenggara Timur"},{id:"281",name:"Sikka",province:"Nusa Tenggara Timur"},{id:"282",name:"Sumba Barat",province:"Nusa Tenggara Timur"},{id:"283",name:"Sumba Barat Daya",province:"Nusa Tenggara Timur"},{id:"284",name:"Sumba Tengah",province:"Nusa Tenggara Timur"},{id:"285",name:"Sumba Timur",province:"Nusa Tenggara Timur"},{id:"286",name:"Timor Tengah Selatan",province:"Nusa Tenggara Timur"},{id:"287",name:"Timor Tengah Utara",province:"Nusa Tenggara Timur"},
+  {id:"288",name:"Balikpapan",province:"Kalimantan Timur"},{id:"289",name:"Berau",province:"Kalimantan Timur"},{id:"290",name:"Bontang",province:"Kalimantan Timur"},{id:"291",name:"Kutai Barat",province:"Kalimantan Timur"},{id:"292",name:"Kutai Kartanegara",province:"Kalimantan Timur"},{id:"293",name:"Kutai Timur",province:"Kalimantan Timur"},{id:"294",name:"Mahakam Hulu",province:"Kalimantan Timur"},{id:"295",name:"Paser",province:"Kalimantan Timur"},{id:"296",name:"Penajam Paser Utara",province:"Kalimantan Timur"},{id:"297",name:"Samarinda",province:"Kalimantan Timur"},
+  {id:"298",name:"Banjar",province:"Kalimantan Selatan"},{id:"299",name:"Banjarbaru",province:"Kalimantan Selatan"},{id:"300",name:"Banjarmasin",province:"Kalimantan Selatan"},{id:"301",name:"Barito Kuala",province:"Kalimantan Selatan"},{id:"302",name:"Hulu Sungai Selatan",province:"Kalimantan Selatan"},{id:"303",name:"Hulu Sungai Tengah",province:"Kalimantan Selatan"},{id:"304",name:"Hulu Sungai Utara",province:"Kalimantan Selatan"},{id:"305",name:"Kotabaru",province:"Kalimantan Selatan"},{id:"306",name:"Tabalong",province:"Kalimantan Selatan"},{id:"307",name:"Tanah Bumbu",province:"Kalimantan Selatan"},{id:"308",name:"Tanah Laut",province:"Kalimantan Selatan"},{id:"309",name:"Tapin",province:"Kalimantan Selatan"},
+  {id:"310",name:"Barito Selatan",province:"Kalimantan Tengah"},{id:"311",name:"Barito Timur",province:"Kalimantan Tengah"},{id:"312",name:"Barito Utara",province:"Kalimantan Tengah"},{id:"313",name:"Gunung Mas",province:"Kalimantan Tengah"},{id:"314",name:"Kapuas",province:"Kalimantan Tengah"},{id:"315",name:"Katingan",province:"Kalimantan Tengah"},{id:"316",name:"Kotawaringin Barat",province:"Kalimantan Tengah"},{id:"317",name:"Kotawaringin Timur",province:"Kalimantan Tengah"},{id:"318",name:"Lamandau",province:"Kalimantan Tengah"},{id:"319",name:"Murung Raya",province:"Kalimantan Tengah"},{id:"320",name:"Palangka Raya",province:"Kalimantan Tengah"},{id:"321",name:"Pulang Pisau",province:"Kalimantan Tengah"},{id:"322",name:"Seruyan",province:"Kalimantan Tengah"},{id:"323",name:"Sukamara",province:"Kalimantan Tengah"},
+  {id:"324",name:"Bengkayang",province:"Kalimantan Barat"},{id:"325",name:"Kapuas Hulu",province:"Kalimantan Barat"},{id:"326",name:"Kayong Utara",province:"Kalimantan Barat"},{id:"327",name:"Ketapang",province:"Kalimantan Barat"},{id:"328",name:"Kubu Raya",province:"Kalimantan Barat"},{id:"329",name:"Landak",province:"Kalimantan Barat"},{id:"330",name:"Melawi",province:"Kalimantan Barat"},{id:"331",name:"Mempawah",province:"Kalimantan Barat"},{id:"332",name:"Pontianak",province:"Kalimantan Barat"},{id:"333",name:"Sambas",province:"Kalimantan Barat"},{id:"334",name:"Sanggau",province:"Kalimantan Barat"},{id:"335",name:"Sekadau",province:"Kalimantan Barat"},{id:"336",name:"Singkawang",province:"Kalimantan Barat"},{id:"337",name:"Sintang",province:"Kalimantan Barat"},
+  {id:"338",name:"Bulungan",province:"Kalimantan Utara"},{id:"339",name:"Malinau",province:"Kalimantan Utara"},{id:"340",name:"Nunukan",province:"Kalimantan Utara"},{id:"341",name:"Tana Tidung",province:"Kalimantan Utara"},{id:"342",name:"Tarakan",province:"Kalimantan Utara"},
+  {id:"343",name:"Boalemo",province:"Gorontalo"},{id:"344",name:"Bone Bolango",province:"Gorontalo"},{id:"345",name:"Gorontalo",province:"Gorontalo"},{id:"346",name:"Gorontalo Utara",province:"Gorontalo"},{id:"347",name:"Pahuwato",province:"Gorontalo"},{id:"348",name:"Pohuwato",province:"Gorontalo"},
+  {id:"349",name:"Banggai",province:"Sulawesi Tengah"},{id:"350",name:"Banggai Kepulauan",province:"Sulawesi Tengah"},{id:"351",name:"Banggai Laut",province:"Sulawesi Tengah"},{id:"352",name:"Buol",province:"Sulawesi Tengah"},{id:"353",name:"Donggala",province:"Sulawesi Tengah"},{id:"354",name:"Morowali",province:"Sulawesi Tengah"},{id:"355",name:"Morowali Utara",province:"Sulawesi Tengah"},{id:"356",name:"Palu",province:"Sulawesi Tengah"},{id:"357",name:"Parigi Moutong",province:"Sulawesi Tengah"},{id:"358",name:"Poso",province:"Sulawesi Tengah"},{id:"359",name:"Sigi",province:"Sulawesi Tengah"},{id:"360",name:"Tojo Una-una",province:"Sulawesi Tengah"},{id:"361",name:"Toli-toli",province:"Sulawesi Tengah"},
+  {id:"362",name:"Bantaeng",province:"Sulawesi Selatan"},{id:"363",name:"Barru",province:"Sulawesi Selatan"},{id:"364",name:"Bone",province:"Sulawesi Selatan"},{id:"365",name:"Bulukumba",province:"Sulawesi Selatan"},{id:"366",name:"Enrekang",province:"Sulawesi Selatan"},{id:"367",name:"Gowa",province:"Sulawesi Selatan"},{id:"368",name:"Jeneponto",province:"Sulawesi Selatan"},{id:"369",name:"Kepulauan Selayar",province:"Sulawesi Selatan"},{id:"370",name:"Luwu",province:"Sulawesi Selatan"},{id:"371",name:"Luwu Timur",province:"Sulawesi Selatan"},{id:"372",name:"Luwu Utara",province:"Sulawesi Selatan"},{id:"373",name:"Makassar",province:"Sulawesi Selatan"},{id:"374",name:"Maros",province:"Sulawesi Selatan"},{id:"375",name:"Palopo",province:"Sulawesi Selatan"},{id:"376",name:"Pangkajene Kepulauan",province:"Sulawesi Selatan"},{id:"377",name:"Pinrang",province:"Sulawesi Selatan"},{id:"378",name:"Sidenreng Rappang",province:"Sulawesi Selatan"},{id:"379",name:"Sinjai",province:"Sulawesi Selatan"},{id:"380",name:"Soppeng",province:"Sulawesi Selatan"},{id:"381",name:"Takalar",province:"Sulawesi Selatan"},{id:"382",name:"Tana Toraja",province:"Sulawesi Selatan"},{id:"383",name:"Toraja Utara",province:"Sulawesi Selatan"},{id:"384",name:"Wajo",province:"Sulawesi Selatan"},
+  {id:"385",name:"Bau-bau",province:"Sulawesi Tenggara"},{id:"386",name:"Bombana",province:"Sulawesi Tenggara"},{id:"387",name:"Buton",province:"Sulawesi Tenggara"},{id:"388",name:"Buton Selatan",province:"Sulawesi Tenggara"},{id:"389",name:"Buton Tengah",province:"Sulawesi Tenggara"},{id:"390",name:"Buton Utara",province:"Sulawesi Tenggara"},{id:"391",name:"Kendari",province:"Sulawesi Tenggara"},{id:"392",name:"Kolaka",province:"Sulawesi Tenggara"},{id:"393",name:"Kolaka Timur",province:"Sulawesi Tenggara"},{id:"394",name:"Kolaka Utara",province:"Sulawesi Tenggara"},{id:"395",name:"Konawe",province:"Sulawesi Tenggara"},{id:"396",name:"Konawe Kepulauan",province:"Sulawesi Tenggara"},{id:"397",name:"Konawe Selatan",province:"Sulawesi Tenggara"},{id:"398",name:"Konawe Utara",province:"Sulawesi Tenggara"},{id:"399",name:"Muna",province:"Sulawesi Tenggara"},{id:"400",name:"Muna Barat",province:"Sulawesi Tenggara"},{id:"401",name:"Wakatobi",province:"Sulawesi Tenggara"},
+  {id:"402",name:"Bolaang Mongondow",province:"Sulawesi Utara"},{id:"403",name:"Bolaang Mongondow Selatan",province:"Sulawesi Utara"},{id:"404",name:"Bolaang Mongondow Timur",province:"Sulawesi Utara"},{id:"405",name:"Bolaang Mongondow Utara",province:"Sulawesi Utara"},{id:"406",name:"Bitung",province:"Sulawesi Utara"},{id:"407",name:"Kepulauan Sangihe",province:"Sulawesi Utara"},{id:"408",name:"Kepulauan Siau Tagulandang Biaro",province:"Sulawesi Utara"},{id:"409",name:"Kepulauan Talaud",province:"Sulawesi Utara"},{id:"410",name:"Kotamobagu",province:"Sulawesi Utara"},{id:"411",name:"Manado",province:"Sulawesi Utara"},{id:"412",name:"Minahasa",province:"Sulawesi Utara"},{id:"413",name:"Minahasa Selatan",province:"Sulawesi Utara"},{id:"414",name:"Minahasa Tenggara",province:"Sulawesi Utara"},{id:"415",name:"Minahasa Utara",province:"Sulawesi Utara"},{id:"416",name:"Tomohon",province:"Sulawesi Utara"},
+  {id:"417",name:"Majene",province:"Sulawesi Barat"},{id:"418",name:"Mamasa",province:"Sulawesi Barat"},{id:"419",name:"Mamuju",province:"Sulawesi Barat"},{id:"420",name:"Mamuju Tengah",province:"Sulawesi Barat"},{id:"421",name:"Mamuju Utara",province:"Sulawesi Barat"},{id:"422",name:"Polewali Mandar",province:"Sulawesi Barat"},
+  {id:"423",name:"Ambon",province:"Maluku"},{id:"424",name:"Buru",province:"Maluku"},{id:"425",name:"Buru Selatan",province:"Maluku"},{id:"426",name:"Kepulauan Aru",province:"Maluku"},{id:"427",name:"Maluku Barat Daya",province:"Maluku"},{id:"428",name:"Maluku Tengah",province:"Maluku"},{id:"429",name:"Maluku Tenggara",province:"Maluku"},{id:"430",name:"Maluku Tenggara Barat",province:"Maluku"},{id:"431",name:"Seram Bagian Barat",province:"Maluku"},{id:"432",name:"Seram Bagian Timur",province:"Maluku"},{id:"433",name:"Tual",province:"Maluku"},
+  {id:"434",name:"Halmahera Barat",province:"Maluku Utara"},{id:"435",name:"Halmahera Selatan",province:"Maluku Utara"},{id:"436",name:"Halmahera Tengah",province:"Maluku Utara"},{id:"437",name:"Halmahera Timur",province:"Maluku Utara"},{id:"438",name:"Halmahera Utara",province:"Maluku Utara"},{id:"439",name:"Kepulauan Sula",province:"Maluku Utara"},{id:"440",name:"Pulau Morotai",province:"Maluku Utara"},{id:"441",name:"Pulau Taliabu",province:"Maluku Utara"},{id:"442",name:"Ternate",province:"Maluku Utara"},{id:"443",name:"Tidore Kepulauan",province:"Maluku Utara"},
+  {id:"444",name:"Asmat",province:"Papua"},{id:"445",name:"Biak Numfor",province:"Papua"},{id:"446",name:"Boven Digoel",province:"Papua"},{id:"447",name:"Deiyai",province:"Papua"},{id:"448",name:"Dogiyai",province:"Papua"},{id:"449",name:"Intan Jaya",province:"Papua"},{id:"450",name:"Jayapura",province:"Papua"},{id:"451",name:"Jayawijaya",province:"Papua"},{id:"452",name:"Keerom",province:"Papua"},{id:"453",name:"Kepulauan Yapen",province:"Papua"},{id:"454",name:"Lanny Jaya",province:"Papua"},{id:"455",name:"Mamberamo Raya",province:"Papua"},{id:"456",name:"Mamberamo Tengah",province:"Papua"},{id:"457",name:"Mappi",province:"Papua"},{id:"458",name:"Merauke",province:"Papua"},{id:"459",name:"Mimika",province:"Papua"},{id:"460",name:"Nabire",province:"Papua"},{id:"461",name:"Nduga",province:"Papua"},{id:"462",name:"Paniai",province:"Papua"},{id:"463",name:"Pegunungan Bintang",province:"Papua"},{id:"464",name:"Puncak",province:"Papua"},{id:"465",name:"Puncak Jaya",province:"Papua"},{id:"466",name:"Sarmi",province:"Papua"},{id:"467",name:"Sorong",province:"Papua Barat"},{id:"468",name:"Supiori",province:"Papua"},{id:"469",name:"Tolikara",province:"Papua"},{id:"470",name:"Waropen",province:"Papua"},{id:"471",name:"Yahukimo",province:"Papua"},{id:"472",name:"Yalimo",province:"Papua"},
+  {id:"473",name:"Fakfak",province:"Papua Barat"},{id:"474",name:"Kaimana",province:"Papua Barat"},{id:"475",name:"Manokwari",province:"Papua Barat"},{id:"476",name:"Manokwari Selatan",province:"Papua Barat"},{id:"477",name:"Maybrat",province:"Papua Barat"},{id:"478",name:"Pegunungan Arfak",province:"Papua Barat"},{id:"479",name:"Raja Ampat",province:"Papua Barat"},{id:"480",name:"Sorong Selatan",province:"Papua Barat"},{id:"481",name:"Tambrauw",province:"Papua Barat"},{id:"482",name:"Teluk Bintuni",province:"Papua Barat"},{id:"483",name:"Teluk Wondama",province:"Papua Barat"}
+];
+
 function httpsGet(url) {
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
@@ -32,95 +70,20 @@ exports.handler = async function(event) {
 
     let result;
 
-    if (action === 'province') {
-      result = await httpsGet(`${BASE}/wilayah/provinsi?api_key=${KEY}`);
-
-    } else if (action === 'city') {
-      result = await httpsGet(`${BASE}/wilayah/kabupaten?api_key=${KEY}&id_provinsi=${params.province_id}`);
-
-    } else if (action === 'search') {
+    if (action === 'search') {
+      // Filter dari data kota statis
       const keyword = (params.keyword || '').toLowerCase();
-
-      // Ambil semua provinsi dulu
-      const provRes = await httpsGet(`${BASE}/wilayah/provinsi?api_key=${KEY}`);
-      const provData = JSON.parse(provRes);
-      
-      // Debug: return raw response jika gagal
-      if (provData.code != 200) {
-        return { 
-          statusCode: 200, 
-          headers: { ...cors, 'Content-Type': 'application/json' }, 
-          body: JSON.stringify({ code: 500, debug: provData }) 
-        };
-      }
-
-      // Ambil kota dari semua provinsi parallel
-      const cityPromises = provData.value.map(p =>
-        httpsGet(`${BASE}/wilayah/kabupaten?api_key=${KEY}&id_provinsi=${p.id}`)
-          .then(r => {
-            const d = JSON.parse(r);
-            return (d.code == 200 && d.value)
-              ? d.value
-                  .filter(c => c.name.toLowerCase().includes(keyword))
-                  .map(c => ({ id: c.id, name: c.name, province: p.name }))
-              : [];
-          })
-          .catch(() => [])
-      );
-
-      const results = (await Promise.all(cityPromises)).flat().slice(0, 15);
-      
-      // Debug: jika kosong, return info provinsi
-      if (results.length === 0) {
-        const firstProv = provData.value[0];
-        const testCity = await httpsGet(`${BASE}/wilayah/kabupaten?api_key=${KEY}&id_provinsi=${firstProv.id}`);
-        result = JSON.stringify({ 
-          code: 200, 
-          value: [], 
-          debug: { 
-            provinces_count: provData.value.length,
-            keyword,
-            first_province: firstProv,
-            first_province_cities: JSON.parse(testCity)
-          }
-        });
-      } else {
-        result = JSON.stringify({ code: 200, value: results });
-      }
-
-    } else if (action === 'allcity') {
-      // Ambil semua kota dari semua provinsi untuk search
-      const provRes = await httpsGet(`${BASE}/wilayah/provinsi?api_key=${KEY}`);
-      const provData = JSON.parse(provRes);
-      
-      if (provData.code != 200) {
-        return { statusCode: 200, headers: { ...cors, 'Content-Type': 'application/json' }, body: JSON.stringify({ code: 500, message: 'Gagal ambil provinsi' }) };
-      }
-
-      // Ambil kota dari setiap provinsi (parallel)
-      const cityPromises = provData.value.map(p =>
-        httpsGet(`${BASE}/wilayah/kabupaten?api_key=${KEY}&id_provinsi=${p.id}`)
-          .then(r => {
-            const d = JSON.parse(r);
-            return (d.code == 200 && d.value) ? d.value.map(c => ({
-              id: c.id,
-              name: c.name,
-              province: p.name,
-              province_id: p.id
-            })) : [];
-          })
-          .catch(() => [])
-      );
-
-      const allArrays = await Promise.all(cityPromises);
-      const allCities = allArrays.flat();
-
-      result = JSON.stringify({ code: 200, value: allCities });
+      const found = CITIES.filter(c =>
+        c.name.toLowerCase().includes(keyword) ||
+        c.province.toLowerCase().includes(keyword)
+      ).slice(0, 12);
+      result = JSON.stringify({ code: 200, value: found });
 
     } else if (action === 'cost') {
-      result = await httpsGet(
+      const r = await httpsGet(
         `${BASE}/cek_ongkir?api_key=${KEY}&kurir=${params.courier}&berat=${params.weight || 1000}&asal=${params.origin}&tujuan=${params.destination}`
       );
+      result = r;
 
     } else {
       return { statusCode: 400, body: JSON.stringify({ error: 'Invalid action' }) };
