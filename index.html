@@ -501,6 +501,7 @@
       <button class="tab-btn active" role="tab" aria-selected="true" onclick="filterProducts('all', this)">Semua</button>
       <button class="tab-btn" role="tab" aria-selected="false" onclick="filterProducts('protein', this)">Protein</button>
       <button class="tab-btn" role="tab" aria-selected="false" onclick="filterProducts('sayur', this)">Sayur</button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="filterProducts('sambal', this)">Sambal</button>
     </div>
 
     <div class="products-grid" id="productsGrid" role="list">
@@ -650,11 +651,24 @@
         </div>
       </article>
 
-    </div>
-  </div>
-</section>
+      <!-- SAMBAL -->
+      <article class="product-card fade-in" data-category="sambal" role="listitem" style="transition-delay:.45s">
+        <div class="product-img"><img src="img/sambal-matah.png" alt="Sambal Matah SA.TOEAN" loading="lazy" /></div>
+        <div class="product-body">
+          <p class="product-category">Sambal</p>
+          <h3 class="product-name">Sambal Matah</h3>
+          <p class="product-desc">Segarnya bawang, daun jeruk, serai, dan cabai, bikin setiap suapan makin seru!</p>
+          <div class="product-footer">
+            <span class="product-price">Rp4.000</span>
+            <a class="btn-order-sm" href="#order" onclick="orderItem('sambal_matah')" aria-label="Pesan Sambal Matah">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pesan
+            </a>
+          </div>
+        </div>
+      </article>
 
-<!-- PACKAGES -->
+      </div><!-- /products-grid -->
 <section id="packages">
   <div class="container">
     <div class="pkg-header fade-in">
@@ -948,6 +962,12 @@
           <div class="omenu-item" data-price="16500" data-key="pepes_telur_jamur" data-label="Pepes Telur Jamur">
             <img src="img/pepes-telur-jamur.png" alt="Pepes Telur Jamur" />
             <div class="omenu-info"><span class="omenu-name">Pepes Telur Jamur</span><span class="omenu-price">Rp16.500</span></div>
+            <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
+          </div>
+
+          <div class="omenu-item" data-price="4000" data-key="sambal_matah" data-label="Sambal Matah">
+            <img src="img/sambal-matah.png" alt="Sambal Matah" />
+            <div class="omenu-info"><span class="omenu-name">Sambal Matah</span><span class="omenu-price">Rp4.000</span></div>
             <div class="oqty"><button type="button" onclick="chQty(this,-1)">-</button><input class="oqty-val" type="number" value="0" min="0" readonly /><button type="button" onclick="chQty(this,1)">+</button></div>
           </div>
 
@@ -1291,6 +1311,7 @@
       cah_tauge_kulit_ayam:   'Cah Tauge Kulit Ayam (Rp16.500)',
       tumis_brokoli_ayam:     'Tumis Brokoli Ayam (Rp16.500)',
       pepes_telur_jamur:      'Pepes Telur Jamur (Rp16.500)',
+      sambal_matah:           'Sambal Matah (Rp4.000)',
       paket_a:                'Paket Bersa.toe A (Rp145.000)',
       paket_b:                'Paket Bersa.toe B (Rp80.000)',
       paket_c:                'Paket Bersa.toe C (Rp50.000)'
