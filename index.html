@@ -17,16 +17,16 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --green:    #075B3D;
-      --green-dk: #054a31;
-      --green-lt: #0a7a52;
-      --cream:    #FAF8EF;
-      --cream-dk: #f0edd8;
-      --gold:     #C9A84C;
+      --green:    #5C4033;
+      --green-dk: #4a3029;
+      --green-lt: #7a5547;
+      --cream:    #F5F0E8;
+      --cream-dk: #ede5d8;
+      --gold:     #C4956A;
       --terra:    #C2614A;
       --white:    #FFFFFF;
-      --text:     #1a1a1a;
-      --text-lt:  #555;
+      --text:     #2a1f1a;
+      --text-lt:  #6b5a52;
       --radius:   16px;
       --shadow:   0 4px 24px rgba(0,0,0,.09);
       --shadow-md:0 8px 40px rgba(0,0,0,.13);
@@ -69,7 +69,7 @@
     .btn-outline { background: transparent; color: var(--green); border: 2px solid var(--green); }
     .btn-outline:hover { background: var(--green); color: var(--white); transform: translateY(-2px); }
     .btn-gold { background: var(--gold); color: var(--white); }
-    .btn-gold:hover { background: #b5932f; transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .btn-gold:hover { background: #a87d55; transform: translateY(-2px); box-shadow: var(--shadow-md); }
     .btn-wa { background: #25D366; color: var(--white); font-size: 15px; padding: 16px 36px; }
     .btn-wa:hover { background: #1db954; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,.35); }
 
@@ -78,7 +78,7 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 999;
       background: rgba(250,248,239,.92);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(7,91,61,.08);
+      border-bottom: 1px solid rgba(92,64,51,.08);
       transition: var(--transition);
     }
     .nav-inner {
@@ -94,7 +94,7 @@
     .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--green); border-radius: 2px; transition: var(--transition); }
     .mobile-menu {
       display: none; position: fixed; top: 64px; left: 0; right: 0;
-      background: var(--cream); border-bottom: 1px solid rgba(7,91,61,.1);
+      background: var(--cream); border-bottom: 1px solid rgba(92,64,51,.1);
       padding: 20px; z-index: 998; flex-direction: column; gap: 12px;
     }
     .mobile-menu.open { display: flex; }
@@ -110,7 +110,7 @@
     .hero-bg-pattern {
       position: absolute; inset: 0;
       background-image:
-        radial-gradient(circle at 15% 50%, rgba(201,168,76,.12) 0%, transparent 50%),
+        radial-gradient(circle at 15% 50%, rgba(196,149,106,.12) 0%, transparent 50%),
         radial-gradient(circle at 85% 20%, rgba(255,255,255,.05) 0%, transparent 40%);
     }
     .hero-inner {
@@ -211,17 +211,17 @@
     .pkg-card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,0,0,.25); }
 
     /* Paket A - Cream */
-    .pkg-card-a { background: var(--cream); border: 1px solid rgba(201,168,76,.3); color: var(--text); }
+    .pkg-card-a { background: var(--cream); border: 1px solid rgba(196,149,106,.3); color: var(--text); }
     .pkg-card-a .pkg-name        { color: var(--green); }
     .pkg-card-a .pkg-isi         { color: var(--text-lt); }
     .pkg-card-a .pkg-price-normal{ color: var(--text-lt); opacity: .6; text-decoration: line-through; font-size:13px; margin-bottom:2px; }
     .pkg-card-a .pkg-price-promo { color: var(--green); }
     .pkg-card-a .pkg-recs-label  { color: var(--text-lt); }
     .pkg-card-a .pkg-recs li     { color: var(--text); }
-    .pkg-card-a .pkg-bonus       { background: rgba(7,91,61,.08); border: 1px solid rgba(7,91,61,.2); color: var(--green); }
+    .pkg-card-a .pkg-bonus       { background: rgba(92,64,51,.08); border: 1px solid rgba(92,64,51,.2); color: var(--green); }
 
     /* Paket B - Gold */
-    .pkg-card-b { background: var(--gold); border: 1px solid #b5932f; }
+    .pkg-card-b { background: var(--gold); border: 1px solid #a87d55; }
     .pkg-card-b .pkg-name        { color: #fff; }
     .pkg-card-b .pkg-isi         { color: rgba(255,255,255,.85); }
     .pkg-card-b .pkg-price-normal{ color: rgba(255,255,255,.65); text-decoration: line-through; font-size:13px; margin-bottom:2px; }
@@ -253,7 +253,7 @@
     .pkg-recs li::before { content: '\2726'; position: absolute; left: 0; color: var(--gold); font-size: 8px; top: 3px; }
     .pkg-bonus {
       display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(201,168,76,.15); border: 1px solid rgba(201,168,76,.3);
+      background: rgba(196,149,106,.15); border: 1px solid rgba(196,149,106,.3);
       border-radius: 8px; padding: 8px 12px;
       font-size: 12px; font-weight: 600; color: var(--gold); margin-bottom: 20px;
     }
@@ -278,7 +278,7 @@
     .why-card:hover { transform: translateY(-4px); }
     .why-icon {
       width: 52px; height: 52px; border-radius: 14px;
-      background: rgba(7,91,61,.08); display: flex; align-items: center;
+      background: rgba(92,64,51,.08); display: flex; align-items: center;
       justify-content: center; flex-shrink: 0;
     }
     .why-text h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--green); margin-bottom: 6px; }
@@ -308,7 +308,7 @@
       display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
     }
     .howto-tip {
-      background: rgba(7,91,61,.06); border-left: 4px solid var(--green);
+      background: rgba(92,64,51,.06); border-left: 4px solid var(--green);
       border-radius: 0 var(--radius) var(--radius) 0; padding: 18px 22px;
       display: flex; gap: 14px; align-items: flex-start;
     }
@@ -323,7 +323,7 @@
     .order-inner p { color: rgba(255,255,255,.8); font-size: 16px; line-height: 1.7; margin-bottom: 36px; }
 
     /* FOOTER */
-    footer { background: #04301f; color: rgba(255,255,255,.75); padding: 48px 0 32px; }
+    footer { background: #3a2318; color: rgba(255,255,255,.75); padding: 48px 0 32px; }
     .footer-inner { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; }
     .footer-logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--white); }
     .footer-tagline { font-size: 13px; font-style: italic; color: var(--gold); }
@@ -672,7 +672,7 @@
 <section id="packages">
   <div class="container">
     <div class="pkg-header fade-in">
-      <p class="section-label" style="color:rgba(201,168,76,.9)">Paket Hemat</p>
+      <p class="section-label" style="color:rgba(196,149,106,.9)">Paket Hemat</p>
       <h2>PAKET BERSA.TOE</h2>
       <p class="sub">Sudah pasti lebih hemat!</p>
       <p>Protein dan sayur Bersa.toe. Mereka berdua sebenarnya ditakdirkan untuk berada di atas satoe piring yang sama.</p>
@@ -746,7 +746,7 @@
     <div class="why-grid">
       <div class="why-card fade-in">
         <div class="why-icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5C4033" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
         <div class="why-text">
           <h3>Praktis</h3>
@@ -755,7 +755,7 @@
       </div>
       <div class="why-card fade-in" style="transition-delay:.08s">
         <div class="why-icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5C4033" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
         <div class="why-text">
           <h3>Pilihan Beragam</h3>
@@ -764,7 +764,7 @@
       </div>
       <div class="why-card fade-in" style="transition-delay:.16s">
         <div class="why-icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5C4033" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <div class="why-text">
           <h3>Fleksibel</h3>
@@ -773,7 +773,7 @@
       </div>
       <div class="why-card fade-in" style="transition-delay:.24s">
         <div class="why-icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5C4033" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <div class="why-text">
           <h3>Siap Dinikmati</h3>
@@ -837,7 +837,7 @@
 
     <div class="howto-tip fade-in">
       <span class="tip-icon" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#075B3D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5C4033" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       </span>
       <p>
         <strong>Tips SA.TOEAN:</strong> Keluarkan SA.TOEAN dari freezer pada malam hari dan letakkan di chiller bawah agar tidak beku. Pagi hari produk lebih siap diproses.
@@ -850,7 +850,7 @@
 <section id="order" style="background:var(--green);padding:72px 0;">
   <div class="container">
     <div class="fade-in" style="text-align:center;margin-bottom:48px;">
-      <p class="section-label" style="color:rgba(201,168,76,.9)">Pemesanan</p>
+      <p class="section-label" style="color:rgba(196,149,106,.9)">Pemesanan</p>
       <h2 style="color:var(--white);font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:12px;">Sudah Tahu Mau Makan Apa Hari Ini?</h2>
       <p style="color:rgba(255,255,255,.75);max-width:480px;margin:0 auto;">Isi form di bawah - pesananmu langsung masuk ke WhatsApp kami dan tercatat otomatis.</p>
     </div>
@@ -1425,23 +1425,23 @@
 
 <style>
   /* CEK ONGKIR */
-  .kota-suggest { position: absolute; z-index: 100; background: #1a3d2b; border: 1px solid rgba(255,255,255,.2); border-radius: 10px; max-height: 200px; overflow-y: auto; width: 100%; margin-top: 4px; }
+  .kota-suggest { position: absolute; z-index: 100; background: #3d2b1f; border: 1px solid rgba(255,255,255,.2); border-radius: 10px; max-height: 200px; overflow-y: auto; width: 100%; margin-top: 4px; }
   .kota-suggest-item { padding: 10px 14px; font-size: 13px; color: #fff; cursor: pointer; transition: background .2s; }
-  .kota-suggest-item:hover { background: rgba(201,168,76,.2); }
+  .kota-suggest-item:hover { background: rgba(196,149,106,.2); }
   .oform-group { position: relative; }
   .btn-cek-ongkir { background: var(--gold); color: #fff; border: none; border-radius: 50px; padding: 12px 28px; font-size: 14px; font-weight: 700; cursor: pointer; transition: background .3s, transform .3s; font-family: inherit; }
-  .btn-cek-ongkir:hover { background: #b5932f; transform: translateY(-2px); }
+  .btn-cek-ongkir:hover { background: #a87d55; transform: translateY(-2px); }
   .btn-cek-ongkir:disabled { background: rgba(255,255,255,.2); cursor: not-allowed; transform: none; }
   .ongkir-list { display: flex; flex-direction: column; gap: 8px; }
   .ongkir-item { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: border-color .3s, background .3s; }
-  .ongkir-item:hover, .ongkir-item.selected { border-color: var(--gold); background: rgba(201,168,76,.12); }
+  .ongkir-item:hover, .ongkir-item.selected { border-color: var(--gold); background: rgba(196,149,106,.12); }
   .ongkir-item-left { display: flex; flex-direction: column; gap: 2px; }
   .ongkir-service { font-size: 13px; font-weight: 700; color: #fff; }
   .ongkir-desc { font-size: 11px; color: rgba(255,255,255,.6); }
   .ongkir-price { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); }
   .ongkir-etd { font-size: 11px; color: rgba(255,255,255,.5); text-align: right; }
   select#f-kurir { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 10px; padding: 12px 14px; color: #fff; font-size: 14px; font-family: inherit; outline: none; width: 100%; cursor: pointer; }
-  select#f-kurir option { background: #075B3D; color: #fff; }
+  select#f-kurir option { background: #5C4033; color: #fff; }
 
 
   .oform { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; padding: 36px 32px; max-width: 860px; margin: 0 auto; }
@@ -1453,29 +1453,29 @@
   .oform-group label { font-size: 12px; font-weight: 700; letter-spacing: .06em; color: rgba(255,255,255,.7); text-transform: uppercase; }
   .oform-group input, .oform-group textarea { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 10px; padding: 12px 14px; color: #fff; font-size: 14px; font-family: inherit; outline: none; transition: border-color .3s; width: 100%; }
   .oform-group input::placeholder, .oform-group textarea::placeholder { color: rgba(255,255,255,.35); }
-  .oform-group input:focus, .oform-group textarea:focus { border-color: #C9A84C; }
+  .oform-group input:focus, .oform-group textarea:focus { border-color: #C4956A; }
   .oform-group textarea { resize: vertical; }
   .omenu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .omenu-item { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; overflow: hidden; transition: border-color .3s, background .3s; }
-  .omenu-item.active { border-color: #C9A84C; background: rgba(201,168,76,.12); }
+  .omenu-item.active { border-color: #C4956A; background: rgba(196,149,106,.12); }
   .omenu-item img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
   .omenu-info { padding: 8px 10px 4px; }
   .omenu-name { display: block; font-size: 12px; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: 2px; }
-  .omenu-price { display: block; font-size: 11px; color: #C9A84C; font-weight: 700; }
+  .omenu-price { display: block; font-size: 11px; color: #C4956A; font-weight: 700; }
   .opaket-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .opaket-item { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; transition: border-color .3s, background .3s; }
-  .opaket-item.active { border-color: #C9A84C; background: rgba(201,168,76,.12); }
-  .opaket-name { display: block; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #C9A84C; margin-bottom: 4px; }
+  .opaket-item.active { border-color: #C4956A; background: rgba(196,149,106,.12); }
+  .opaket-name { display: block; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #C4956A; margin-bottom: 4px; }
   .opaket-desc { display: block; font-size: 11px; color: rgba(255,255,255,.65); margin-bottom: 6px; line-height: 1.5; }
   .opaket-price { display: block; font-size: 1.1rem; font-weight: 700; color: #fff; }
   .oqty { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 8px; }
   .oqty button { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(255,255,255,.1); color: #fff; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .3s; line-height: 1; }
-  .oqty button:hover { background: #C9A84C; border-color: #C9A84C; }
+  .oqty button:hover { background: #C4956A; border-color: #C4956A; }
   .oqty-val { width: 36px; text-align: center; background: transparent; border: none; color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; }
   .oform-summary { background: rgba(0,0,0,.2); border-radius: 12px; padding: 16px 20px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 8px; }
   .osum-row { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: rgba(255,255,255,.75); }
   .osum-total { font-size: 1.2rem; font-weight: 700; color: #fff; padding-top: 8px; border-top: 1px solid rgba(255,255,255,.1); margin-top: 4px; }
-  .osum-total span:last-child { color: #C9A84C; font-family: 'Playfair Display', serif; }
+  .osum-total span:last-child { color: #C4956A; font-family: 'Playfair Display', serif; }
   .obtn-submit { width: 100%; padding: 16px; border-radius: 50px; background: #25D366; color: #fff; font-size: 15px; font-weight: 700; letter-spacing: .05em; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; border: none; font-family: inherit; transition: background .3s, transform .3s, box-shadow .3s; }
   .obtn-submit:hover { background: #1db954; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,.4); }
   .obtn-submit:disabled { background: rgba(255,255,255,.2); cursor: not-allowed; transform: none; box-shadow: none; }
